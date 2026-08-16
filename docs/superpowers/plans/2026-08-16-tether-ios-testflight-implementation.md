@@ -290,7 +290,7 @@ protocol ReminderSettingsStoring: AnyObject {
 
 - Produces: CheckInState, Habit, and HabitDraft.
 
-- [ ] **Step 1: Establish the repository and project**
+- [x] **Step 1: Establish the repository and project**
 
 If the workspace still has no Git repository, initialize main and preserve the approved documents:
 
@@ -313,7 +313,7 @@ Create an iOS App project named Tether in the workspace root with:
 Delete generated sample models and ContentView.
 Move the generated Assets.xcassets into Tether/Resources/Assets.xcassets and keep its target membership.
 
-- [ ] **Step 2: Add project-level settings**
+- [x] **Step 2: Add project-level settings**
 
 Set:
 
@@ -327,7 +327,7 @@ Set:
 
 Add .gitignore entries for DerivedData, xcuserdata, .DS_Store, and local signing state.
 
-- [ ] **Step 3: Write failing validation tests**
+- [x] **Step 3: Write failing validation tests**
 
 ~~~swift
 import Testing
@@ -369,7 +369,7 @@ struct HabitDraftTests {
 }
 ~~~
 
-- [ ] **Step 4: Run tests and confirm the expected failure**
+- [x] **Step 4: Run tests and confirm the expected failure**
 
 ~~~bash
 xcodebuild test -project Tether.xcodeproj -scheme Tether -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' -only-testing:TetherTests/HabitDraftTests
@@ -377,7 +377,7 @@ xcodebuild test -project Tether.xcodeproj -scheme Tether -destination 'platform=
 
 Expected: compilation fails because the domain types are not implemented.
 
-- [ ] **Step 5: Implement the domain types**
+- [x] **Step 5: Implement the domain types**
 
 HabitDraft validation must:
 
@@ -389,7 +389,7 @@ HabitDraft validation must:
 
 Create AppCopy as the single location for finalized English strings from PRD section 14. RootView should show a temporary English Tether title only.
 
-- [ ] **Step 6: Verify build and tests**
+- [x] **Step 6: Verify build and tests**
 
 ~~~bash
 xcodebuild build -project Tether.xcodeproj -scheme Tether -destination 'generic/platform=iOS Simulator'
@@ -398,7 +398,7 @@ xcodebuild test -project Tether.xcodeproj -scheme Tether -destination 'platform=
 
 Expected: build succeeds and HabitDraftTests pass.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ~~~bash
 git add .gitignore Tether.xcodeproj Tether TetherTests TetherUITests

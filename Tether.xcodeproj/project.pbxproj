@@ -1,0 +1,561 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		100000000000000000000001 /* TetherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000001 /* TetherApp.swift */; };
+		100000000000000000000002 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000002 /* RootView.swift */; };
+		100000000000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000003 /* Assets.xcassets */; };
+		100000000000000000000004 /* HabitDraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000004 /* HabitDraftTests.swift */; };
+		100000000000000000000005 /* TetherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000005 /* TetherUITests.swift */; };
+		100000000000000000000006 /* CheckInState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000009 /* CheckInState.swift */; };
+		100000000000000000000007 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000000A /* Habit.swift */; };
+		100000000000000000000008 /* HabitDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000000B /* HabitDraft.swift */; };
+		100000000000000000000009 /* AppCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000000C /* AppCopy.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		120000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 190000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 180000000000000000000001;
+			remoteInfo = Tether;
+		};
+		120000000000000000000002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 190000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 180000000000000000000001;
+			remoteInfo = Tether;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		110000000000000000000001 /* TetherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherApp.swift; sourceTree = "<group>"; };
+		110000000000000000000002 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		110000000000000000000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		110000000000000000000004 /* HabitDraftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDraftTests.swift; sourceTree = "<group>"; };
+		110000000000000000000005 /* TetherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherUITests.swift; sourceTree = "<group>"; };
+		110000000000000000000006 /* Tether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tether.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		110000000000000000000007 /* TetherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TetherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		110000000000000000000008 /* TetherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TetherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		110000000000000000000009 /* CheckInState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInState.swift; sourceTree = "<group>"; };
+		11000000000000000000000A /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		11000000000000000000000B /* HabitDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDraft.swift; sourceTree = "<group>"; };
+		11000000000000000000000C /* AppCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCopy.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		130000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		130000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		130000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		140000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				140000000000000000000002 /* Tether */,
+				140000000000000000000005 /* TetherTests */,
+				140000000000000000000007 /* TetherUITests */,
+				140000000000000000000008 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		140000000000000000000002 /* Tether */ = {
+			isa = PBXGroup;
+			children = (
+				140000000000000000000003 /* App */,
+				140000000000000000000009 /* Core */,
+				14000000000000000000000C /* Shared */,
+				140000000000000000000004 /* Resources */,
+			);
+			path = Tether;
+			sourceTree = "<group>";
+		};
+		140000000000000000000003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000001 /* TetherApp.swift */,
+				110000000000000000000002 /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		140000000000000000000004 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000003 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		140000000000000000000005 /* TetherTests */ = {
+			isa = PBXGroup;
+			children = (
+				140000000000000000000006 /* Core */,
+			);
+			path = TetherTests;
+			sourceTree = "<group>";
+		};
+		140000000000000000000006 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000004 /* HabitDraftTests.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		140000000000000000000007 /* TetherUITests */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000005 /* TetherUITests.swift */,
+			);
+			path = TetherUITests;
+			sourceTree = "<group>";
+		};
+		140000000000000000000008 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000006 /* Tether.app */,
+				110000000000000000000007 /* TetherTests.xctest */,
+				110000000000000000000008 /* TetherUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		140000000000000000000009 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				14000000000000000000000A /* CheckIn */,
+				14000000000000000000000B /* Habit */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		14000000000000000000000A /* CheckIn */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000009 /* CheckInState.swift */,
+			);
+			path = CheckIn;
+			sourceTree = "<group>";
+		};
+		14000000000000000000000B /* Habit */ = {
+			isa = PBXGroup;
+			children = (
+				11000000000000000000000A /* Habit.swift */,
+				11000000000000000000000B /* HabitDraft.swift */,
+			);
+			path = Habit;
+			sourceTree = "<group>";
+		};
+		14000000000000000000000C /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				11000000000000000000000C /* AppCopy.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		180000000000000000000001 /* Tether */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 200000000000000000000002 /* Build configuration list for PBXNativeTarget "Tether" */;
+			buildPhases = (
+				150000000000000000000001 /* Sources */,
+				130000000000000000000001 /* Frameworks */,
+				160000000000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tether;
+			productName = Tether;
+			productReference = 110000000000000000000006 /* Tether.app */;
+			productType = "com.apple.product-type.application";
+		};
+		180000000000000000000002 /* TetherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 200000000000000000000003 /* Build configuration list for PBXNativeTarget "TetherTests" */;
+			buildPhases = (
+				150000000000000000000002 /* Sources */,
+				130000000000000000000002 /* Frameworks */,
+				160000000000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				170000000000000000000001 /* PBXTargetDependency */,
+			);
+			name = TetherTests;
+			productName = TetherTests;
+			productReference = 110000000000000000000007 /* TetherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		180000000000000000000003 /* TetherUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 200000000000000000000004 /* Build configuration list for PBXNativeTarget "TetherUITests" */;
+			buildPhases = (
+				150000000000000000000003 /* Sources */,
+				130000000000000000000003 /* Frameworks */,
+				160000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				170000000000000000000002 /* PBXTargetDependency */,
+			);
+			name = TetherUITests;
+			productName = TetherUITests;
+			productReference = 110000000000000000000008 /* TetherUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		190000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					180000000000000000000001 = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					180000000000000000000002 = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 180000000000000000000001;
+					};
+					180000000000000000000003 = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 180000000000000000000001;
+					};
+				};
+			};
+			buildConfigurationList = 200000000000000000000001 /* Build configuration list for PBXProject "Tether" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 140000000000000000000001;
+			productRefGroup = 140000000000000000000008 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				180000000000000000000001 /* Tether */,
+				180000000000000000000002 /* TetherTests */,
+				180000000000000000000003 /* TetherUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		160000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		160000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		160000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		150000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000001 /* TetherApp.swift in Sources */,
+				100000000000000000000002 /* RootView.swift in Sources */,
+				100000000000000000000006 /* CheckInState.swift in Sources */,
+				100000000000000000000007 /* Habit.swift in Sources */,
+				100000000000000000000008 /* HabitDraft.swift in Sources */,
+				100000000000000000000009 /* AppCopy.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		150000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000004 /* HabitDraftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		150000000000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000005 /* TetherUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		170000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 180000000000000000000001 /* Tether */;
+			targetProxy = 120000000000000000000001 /* PBXContainerItemProxy */;
+		};
+		170000000000000000000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 180000000000000000000001 /* Tether */;
+			targetProxy = 120000000000000000000002 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		210000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		210000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		210000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_LANGUAGE = en;
+				DEVELOPMENT_ASSET_PATHS = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Tether;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fredjeong.tether;
+				PRODUCT_NAME = Tether;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		210000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_LANGUAGE = en;
+				DEVELOPMENT_ASSET_PATHS = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Tether;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fredjeong.tether;
+				PRODUCT_NAME = Tether;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		210000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fredjeong.tether.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tether.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tether";
+			};
+			name = Debug;
+		};
+		210000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fredjeong.tether.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tether.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tether";
+			};
+			name = Release;
+		};
+		210000000000000000000007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fredjeong.tether.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = Tether;
+			};
+			name = Debug;
+		};
+		210000000000000000000008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fredjeong.tether.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = Tether;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		200000000000000000000001 /* Build configuration list for PBXProject "Tether" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210000000000000000000001 /* Debug */,
+				210000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		200000000000000000000002 /* Build configuration list for PBXNativeTarget "Tether" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210000000000000000000003 /* Debug */,
+				210000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		200000000000000000000003 /* Build configuration list for PBXNativeTarget "TetherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210000000000000000000005 /* Debug */,
+				210000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		200000000000000000000004 /* Build configuration list for PBXNativeTarget "TetherUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210000000000000000000007 /* Debug */,
+				210000000000000000000008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 190000000000000000000001 /* Project object */;
+}

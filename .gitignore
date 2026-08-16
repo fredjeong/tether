@@ -1,1 +1,10 @@
 .worktrees/
+.DS_Store
+DerivedData/
+xcuserdata/
+*.xcuserstate
+
+# Local signing overrides and credentials
+LocalSigning.xcconfig
+*.mobileprovision
+*.p12
