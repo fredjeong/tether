@@ -430,11 +430,11 @@ git commit -m "build: scaffold Tether iOS app"
 - Produces: LocalDay, DayProviding, SystemDayProvider, FixedDayProvider, DailyCheckIn, ConnectionPhase, TetherSnapshot, TetherCalculator.snapshot.
 - Consumes: Habit and CheckInState from Task 1.
 
-- [ ] **Step 1: Run the Task 1 test suite**
+- [x] **Step 1: Run the Task 1 test suite**
 
 Use the full TetherTests target and stop if the baseline is not green.
 
-- [ ] **Step 2: Write LocalDay tests**
+- [x] **Step 2: Write LocalDay tests**
 
 Cover:
 
@@ -456,7 +456,7 @@ Example:
 }
 ~~~
 
-- [ ] **Step 3: Write TetherCalculator tests**
+- [x] **Step 3: Write TetherCalculator tests**
 
 Create helpers that build check-ins for exact LocalDay values. Test:
 
@@ -496,11 +496,11 @@ Example:
 }
 ~~~
 
-- [ ] **Step 4: Confirm tests fail**
+- [x] **Step 4: Confirm tests fail**
 
 Run LocalDayTests and TetherCalculatorTests. Expected: compilation failure for missing APIs.
 
-- [ ] **Step 5: Implement LocalDay**
+- [x] **Step 5: Implement LocalDay**
 
 LocalDay must:
 
@@ -512,7 +512,7 @@ LocalDay must:
 
 DayProviding must expose now and calendar. SystemDayProvider uses Date() and Calendar.autoupdatingCurrent. FixedDayProvider is compiled into the app module so feature tests can inject time without changing the device clock.
 
-- [ ] **Step 6: Implement TetherCalculator**
+- [x] **Step 6: Implement TetherCalculator**
 
 Algorithm:
 
@@ -525,7 +525,7 @@ Algorithm:
 7. Otherwise, if yesterday exists, Current is the segment ending yesterday and Active remains pending.
 8. Otherwise, Current is 0 and phase is Reconnect.
 
-- [ ] **Step 7: Verify and commit**
+- [x] **Step 7: Verify and commit**
 
 Run the full TetherTests target, then:
 

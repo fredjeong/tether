@@ -16,6 +16,14 @@
 		100000000000000000000007 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000000A /* Habit.swift */; };
 		100000000000000000000008 /* HabitDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000000B /* HabitDraft.swift */; };
 		100000000000000000000009 /* AppCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000000C /* AppCopy.swift */; };
+		10000000000000000000000A /* LocalDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000000D /* LocalDayTests.swift */; };
+		10000000000000000000000B /* TetherCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000000E /* TetherCalculatorTests.swift */; };
+		10000000000000000000000C /* DayProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000000F /* DayProviding.swift */; };
+		10000000000000000000000D /* LocalDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000010 /* LocalDay.swift */; };
+		10000000000000000000000E /* DailyCheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000011 /* DailyCheckIn.swift */; };
+		10000000000000000000000F /* ConnectionPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000012 /* ConnectionPhase.swift */; };
+		100000000000000000000010 /* TetherSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000013 /* TetherSnapshot.swift */; };
+		100000000000000000000011 /* TetherCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000014 /* TetherCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +56,14 @@
 		11000000000000000000000A /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		11000000000000000000000B /* HabitDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDraft.swift; sourceTree = "<group>"; };
 		11000000000000000000000C /* AppCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCopy.swift; sourceTree = "<group>"; };
+		11000000000000000000000D /* LocalDayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDayTests.swift; sourceTree = "<group>"; };
+		11000000000000000000000E /* TetherCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherCalculatorTests.swift; sourceTree = "<group>"; };
+		11000000000000000000000F /* DayProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayProviding.swift; sourceTree = "<group>"; };
+		110000000000000000000010 /* LocalDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDay.swift; sourceTree = "<group>"; };
+		110000000000000000000011 /* DailyCheckIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCheckIn.swift; sourceTree = "<group>"; };
+		110000000000000000000012 /* ConnectionPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionPhase.swift; sourceTree = "<group>"; };
+		110000000000000000000013 /* TetherSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherSnapshot.swift; sourceTree = "<group>"; };
+		110000000000000000000014 /* TetherCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +141,8 @@
 			isa = PBXGroup;
 			children = (
 				110000000000000000000004 /* HabitDraftTests.swift */,
+				11000000000000000000000D /* LocalDayTests.swift */,
+				11000000000000000000000E /* TetherCalculatorTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -150,8 +168,10 @@
 		140000000000000000000009 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				14000000000000000000000D /* Date */,
 				14000000000000000000000A /* CheckIn */,
 				14000000000000000000000B /* Habit */,
+				14000000000000000000000E /* Tether */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -160,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				110000000000000000000009 /* CheckInState.swift */,
+				110000000000000000000011 /* DailyCheckIn.swift */,
 			);
 			path = CheckIn;
 			sourceTree = "<group>";
@@ -179,6 +200,25 @@
 				11000000000000000000000C /* AppCopy.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		14000000000000000000000D /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				11000000000000000000000F /* DayProviding.swift */,
+				110000000000000000000010 /* LocalDay.swift */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
+		14000000000000000000000E /* Tether */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000012 /* ConnectionPhase.swift */,
+				110000000000000000000013 /* TetherSnapshot.swift */,
+				110000000000000000000014 /* TetherCalculator.swift */,
+			);
+			path = Tether;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +356,12 @@
 				100000000000000000000007 /* Habit.swift in Sources */,
 				100000000000000000000008 /* HabitDraft.swift in Sources */,
 				100000000000000000000009 /* AppCopy.swift in Sources */,
+				10000000000000000000000C /* DayProviding.swift in Sources */,
+				10000000000000000000000D /* LocalDay.swift in Sources */,
+				10000000000000000000000E /* DailyCheckIn.swift in Sources */,
+				10000000000000000000000F /* ConnectionPhase.swift in Sources */,
+				100000000000000000000010 /* TetherSnapshot.swift in Sources */,
+				100000000000000000000011 /* TetherCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +370,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				100000000000000000000004 /* HabitDraftTests.swift in Sources */,
+				10000000000000000000000A /* LocalDayTests.swift in Sources */,
+				10000000000000000000000B /* TetherCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
