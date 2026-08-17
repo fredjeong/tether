@@ -1047,7 +1047,7 @@ git commit -m "feat: add habit settings and reset"
 - ReminderPlan is a pure value with identifier and DateComponents.
 - UserNotificationReminderScheduler owns the prefix tether.daily.
 
-- [ ] **Step 1: Write failing ReminderPlanBuilder tests**
+- [x] **Step 1: Write failing ReminderPlanBuilder tests**
 
 The planner schedules 30 one-shot notifications so reminders continue even if the app is not reopened. Test:
 
@@ -1060,11 +1060,11 @@ The planner schedules 30 one-shot notifications so reminders continue even if th
 - Identifiers are tether.daily. plus LocalDay.storageKey.
 - Every plan uses title A moment for your habit and body Was today Done, Light, or Rest?
 
-- [ ] **Step 2: Write failing settings-store tests**
+- [x] **Step 2: Write failing settings-store tests**
 
 Use a unique UserDefaults suite. Verify default is off at 20:00, save/load round-trips, and reset returns to default.
 
-- [ ] **Step 3: Implement pure reminder types and settings store**
+- [x] **Step 3: Implement pure reminder types and settings store**
 
 UserDefaults keys:
 
@@ -1074,7 +1074,7 @@ UserDefaults keys:
 
 No other settings belong in UserDefaults. This storage is app-only and will be declared with privacy reason CA92.1 in Task 12.
 
-- [ ] **Step 4: Implement UserNotificationReminderScheduler**
+- [x] **Step 4: Implement UserNotificationReminderScheduler**
 
 Behavior:
 
@@ -1087,11 +1087,11 @@ Behavior:
 
 Use one-shot calendar triggers rather than a repeating trigger because today's completed reminder must be removable without disabling future days.
 
-- [ ] **Step 5: Add an in-memory FakeReminderScheduler**
+- [x] **Step 5: Add an in-memory FakeReminderScheduler**
 
 Tests and previews use a fake that records authorization requests, reconcile inputs, and cancellation. Do not call UNUserNotificationCenter from feature tests.
 
-- [ ] **Step 6: Verify and commit**
+- [x] **Step 6: Verify and commit**
 
 Run all service and regression tests. Then:
 

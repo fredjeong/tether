@@ -57,6 +57,16 @@
 		100000000000000000000030 /* SettingsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000033 /* SettingsUITests.swift */; };
 		100000000000000000000031 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000034 /* SettingsView.swift */; };
 		100000000000000000000032 /* HabitEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000035 /* HabitEditView.swift */; };
+		100000000000000000000033 /* ReminderPlanBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000036 /* ReminderPlanBuilderTests.swift */; };
+		100000000000000000000034 /* UserDefaultsReminderSettingsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000037 /* UserDefaultsReminderSettingsStoreTests.swift */; };
+		100000000000000000000035 /* NotificationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000038 /* NotificationPermission.swift */; };
+		100000000000000000000036 /* ReminderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000039 /* ReminderSettings.swift */; };
+		100000000000000000000037 /* ReminderPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000003A /* ReminderPlan.swift */; };
+		100000000000000000000038 /* ReminderPlanBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000003B /* ReminderPlanBuilder.swift */; };
+		100000000000000000000039 /* ReminderScheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000003C /* ReminderScheduling.swift */; };
+		10000000000000000000003A /* ReminderSettingsStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000003D /* ReminderSettingsStoring.swift */; };
+		10000000000000000000003B /* UserDefaultsReminderSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000003E /* UserDefaultsReminderSettingsStore.swift */; };
+		10000000000000000000003C /* UserNotificationReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000003F /* UserNotificationReminderScheduler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +140,16 @@
 		110000000000000000000033 /* SettingsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUITests.swift; sourceTree = "<group>"; };
 		110000000000000000000034 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		110000000000000000000035 /* HabitEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEditView.swift; sourceTree = "<group>"; };
+		110000000000000000000036 /* ReminderPlanBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderPlanBuilderTests.swift; sourceTree = "<group>"; };
+		110000000000000000000037 /* UserDefaultsReminderSettingsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsReminderSettingsStoreTests.swift; sourceTree = "<group>"; };
+		110000000000000000000038 /* NotificationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermission.swift; sourceTree = "<group>"; };
+		110000000000000000000039 /* ReminderSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSettings.swift; sourceTree = "<group>"; };
+		11000000000000000000003A /* ReminderPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderPlan.swift; sourceTree = "<group>"; };
+		11000000000000000000003B /* ReminderPlanBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderPlanBuilder.swift; sourceTree = "<group>"; };
+		11000000000000000000003C /* ReminderScheduling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderScheduling.swift; sourceTree = "<group>"; };
+		11000000000000000000003D /* ReminderSettingsStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSettingsStoring.swift; sourceTree = "<group>"; };
+		11000000000000000000003E /* UserDefaultsReminderSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsReminderSettingsStore.swift; sourceTree = "<group>"; };
+		11000000000000000000003F /* UserNotificationReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationReminderScheduler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +193,7 @@
 				140000000000000000000003 /* App */,
 				140000000000000000000009 /* Core */,
 				140000000000000000000010 /* Data */,
+				14000000000000000000001A /* Services */,
 				140000000000000000000013 /* Features */,
 				14000000000000000000000C /* Shared */,
 				140000000000000000000004 /* Resources */,
@@ -205,6 +226,7 @@
 				140000000000000000000006 /* Core */,
 				14000000000000000000000F /* Data */,
 				140000000000000000000012 /* Features */,
+				140000000000000000000019 /* Services */,
 			);
 			path = TetherTests;
 			sourceTree = "<group>";
@@ -327,6 +349,38 @@
 				110000000000000000000031 /* SettingsViewModelTests.swift */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		140000000000000000000019 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000036 /* ReminderPlanBuilderTests.swift */,
+				110000000000000000000037 /* UserDefaultsReminderSettingsStoreTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		14000000000000000000001A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				14000000000000000000001B /* Reminders */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		14000000000000000000001B /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000038 /* NotificationPermission.swift */,
+				110000000000000000000039 /* ReminderSettings.swift */,
+				11000000000000000000003A /* ReminderPlan.swift */,
+				11000000000000000000003B /* ReminderPlanBuilder.swift */,
+				11000000000000000000003C /* ReminderScheduling.swift */,
+				11000000000000000000003D /* ReminderSettingsStoring.swift */,
+				11000000000000000000003E /* UserDefaultsReminderSettingsStore.swift */,
+				11000000000000000000003F /* UserNotificationReminderScheduler.swift */,
+			);
+			path = Reminders;
 			sourceTree = "<group>";
 		};
 		140000000000000000000013 /* Features */ = {
@@ -564,6 +618,14 @@
 				10000000000000000000002F /* SettingsViewModel.swift in Sources */,
 				100000000000000000000031 /* SettingsView.swift in Sources */,
 				100000000000000000000032 /* HabitEditView.swift in Sources */,
+				100000000000000000000035 /* NotificationPermission.swift in Sources */,
+				100000000000000000000036 /* ReminderSettings.swift in Sources */,
+				100000000000000000000037 /* ReminderPlan.swift in Sources */,
+				100000000000000000000038 /* ReminderPlanBuilder.swift in Sources */,
+				100000000000000000000039 /* ReminderScheduling.swift in Sources */,
+				10000000000000000000003A /* ReminderSettingsStoring.swift in Sources */,
+				10000000000000000000003B /* UserDefaultsReminderSettingsStore.swift in Sources */,
+				10000000000000000000003C /* UserNotificationReminderScheduler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +642,8 @@
 				100000000000000000000025 /* HistoryBuilderTests.swift in Sources */,
 				100000000000000000000029 /* HistoryViewModelTests.swift in Sources */,
 				10000000000000000000002E /* SettingsViewModelTests.swift in Sources */,
+				100000000000000000000033 /* ReminderPlanBuilderTests.swift in Sources */,
+				100000000000000000000034 /* UserDefaultsReminderSettingsStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
