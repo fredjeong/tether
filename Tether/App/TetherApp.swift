@@ -4,13 +4,20 @@ import SwiftUI
 @main
 struct TetherApp: App {
     private let container: ModelContainer
-    private let store: SwiftDataTetherStore
+    private let environment: AppEnvironment
 
     init() {
         do {
             let container = try TetherSchema.makeContainer(inMemory: false)
+            let store = SwiftDataTetherStore(context: container.mainContext)
+            if CommandLine.arguments.contains("-ui-testing-reset") {
+                try store.resetAll()
+            }
             self.container = container
-            store = SwiftDataTetherStore(context: container.mainContext)
+            environment = AppEnvironment(
+                store: store,
+                dayProvider: SystemDayProvider()
+            )
         } catch {
             fatalError("Unable to initialize Tether storage: \(error)")
         }
@@ -18,7 +25,7 @@ struct TetherApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootView(environment: environment)
                 .modelContainer(container)
         }
     }

@@ -659,7 +659,7 @@ git commit -m "feat: persist habits and check-ins with SwiftData"
 - Produces: AppModel.Route.onboarding and AppModel.Route.main.
 - Consumes: TetherStore, HabitDraft, SystemDayProvider, AppCopy.
 
-- [ ] **Step 1: Write failing OnboardingViewModel tests**
+- [x] **Step 1: Write failing OnboardingViewModel tests**
 
 Test:
 
@@ -669,7 +669,7 @@ Test:
 - storage errors set user-visible error text and do not route to main.
 - a pre-existing Habit routes RootView directly to main.
 
-- [ ] **Step 2: Add one failing onboarding UI test**
+- [x] **Step 2: Add one failing onboarding UI test**
 
 Launch with argument -ui-testing-reset. Assert:
 
@@ -687,11 +687,11 @@ Give fields stable accessibility identifiers:
 - habit.submit
 - tab.today
 
-- [ ] **Step 3: Confirm tests fail**
+- [x] **Step 3: Confirm tests fail**
 
 Run OnboardingViewModelTests and OnboardingUITests.
 
-- [ ] **Step 4: Implement AppModel and routing**
+- [x] **Step 4: Implement AppModel and routing**
 
 AppModel loads one Habit at startup:
 
@@ -715,7 +715,7 @@ final class AppModel {
 
 RootView displays onboarding when no Habit exists. Main is a TabView whose initial Today and History destinations clearly identify the upcoming features without exposing broken controls; Tasks 5 and 6 replace those destinations. Settings is opened from a toolbar button added in Task 7.
 
-- [ ] **Step 5: Implement Welcome and Habit Setup**
+- [x] **Step 5: Implement Welcome and Habit Setup**
 
 Use the exact PRD copy. Welcome is one screen, not a carousel. HabitSetup:
 
@@ -725,11 +725,11 @@ Use the exact PRD copy. Welcome is one screen, not a carousel. HabitSetup:
 - Shows a neutral ErrorBanner if saving fails.
 - Does not include reminder controls yet; Task 9 adds them after the notification service exists.
 
-- [ ] **Step 6: Add deterministic UI-test reset**
+- [x] **Step 6: Add deterministic UI-test reset**
 
 Only when the launch argument -ui-testing-reset exists, clear the test container before RootView loads. This path must not be exposed in normal UI.
 
-- [ ] **Step 7: Verify and commit**
+- [x] **Step 7: Verify and commit**
 
 Run unit tests, onboarding UI test, and app build. Then:
 

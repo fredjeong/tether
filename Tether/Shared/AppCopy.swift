@@ -1,5 +1,6 @@
 enum AppCopy {
     static let productName = "Tether"
+    static let productOneLiner = "A habit tracker where rest counts."
 
     static let welcomeHeadline = "Stay connected to who you want to become."
     static let welcomeSupportingCopy = "You don't have to do it perfectly every day. Done, Light, and Rest all keep the connection alive."
@@ -14,6 +15,7 @@ enum AppCopy {
     static let lightMeaningExample = "Move for 10 minutes"
     static let dailyReminderLabel = "Daily reminder"
     static let habitSetupSubmitAction = "Start my tether"
+    static let habitSaveError = "Couldn't save your habit. Please try again."
 
     static let todayPrompt = "How was today?"
     static let doneLabel = "Done"

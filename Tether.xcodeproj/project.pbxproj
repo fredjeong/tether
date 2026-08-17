@@ -30,6 +30,14 @@
 		100000000000000000000015 /* TetherSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000018 /* TetherSchema.swift */; };
 		100000000000000000000016 /* TetherStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000019 /* TetherStore.swift */; };
 		100000000000000000000017 /* SwiftDataTetherStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000001A /* SwiftDataTetherStore.swift */; };
+		100000000000000000000018 /* OnboardingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000001B /* OnboardingViewModelTests.swift */; };
+		100000000000000000000019 /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000001C /* OnboardingUITests.swift */; };
+		10000000000000000000001A /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000001D /* AppEnvironment.swift */; };
+		10000000000000000000001B /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000001E /* AppModel.swift */; };
+		10000000000000000000001C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000001F /* WelcomeView.swift */; };
+		10000000000000000000001D /* HabitSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000020 /* HabitSetupView.swift */; };
+		10000000000000000000001E /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000021 /* OnboardingViewModel.swift */; };
+		10000000000000000000001F /* ErrorBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000022 /* ErrorBanner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +84,14 @@
 		110000000000000000000018 /* TetherSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherSchema.swift; sourceTree = "<group>"; };
 		110000000000000000000019 /* TetherStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherStore.swift; sourceTree = "<group>"; };
 		11000000000000000000001A /* SwiftDataTetherStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTetherStore.swift; sourceTree = "<group>"; };
+		11000000000000000000001B /* OnboardingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModelTests.swift; sourceTree = "<group>"; };
+		11000000000000000000001C /* OnboardingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUITests.swift; sourceTree = "<group>"; };
+		11000000000000000000001D /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		11000000000000000000001E /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		11000000000000000000001F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		110000000000000000000020 /* HabitSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSetupView.swift; sourceTree = "<group>"; };
+		110000000000000000000021 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		110000000000000000000022 /* ErrorBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBanner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +135,7 @@
 				140000000000000000000003 /* App */,
 				140000000000000000000009 /* Core */,
 				140000000000000000000010 /* Data */,
+				140000000000000000000013 /* Features */,
 				14000000000000000000000C /* Shared */,
 				140000000000000000000004 /* Resources */,
 			);
@@ -130,6 +147,8 @@
 			children = (
 				110000000000000000000001 /* TetherApp.swift */,
 				110000000000000000000002 /* RootView.swift */,
+				11000000000000000000001D /* AppEnvironment.swift */,
+				11000000000000000000001E /* AppModel.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -147,6 +166,7 @@
 			children = (
 				140000000000000000000006 /* Core */,
 				14000000000000000000000F /* Data */,
+				140000000000000000000012 /* Features */,
 			);
 			path = TetherTests;
 			sourceTree = "<group>";
@@ -165,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				110000000000000000000005 /* TetherUITests.swift */,
+				11000000000000000000001C /* OnboardingUITests.swift */,
 			);
 			path = TetherUITests;
 			sourceTree = "<group>";
@@ -212,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				11000000000000000000000C /* AppCopy.swift */,
+				110000000000000000000022 /* ErrorBanner.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -241,6 +263,32 @@
 				110000000000000000000015 /* SwiftDataTetherStoreTests.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		140000000000000000000012 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				11000000000000000000001B /* OnboardingViewModelTests.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		140000000000000000000013 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				140000000000000000000014 /* Onboarding */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		140000000000000000000014 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				11000000000000000000001F /* WelcomeView.swift */,
+				110000000000000000000020 /* HabitSetupView.swift */,
+				110000000000000000000021 /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		140000000000000000000010 /* Data */ = {
@@ -409,6 +457,12 @@
 				100000000000000000000015 /* TetherSchema.swift in Sources */,
 				100000000000000000000016 /* TetherStore.swift in Sources */,
 				100000000000000000000017 /* SwiftDataTetherStore.swift in Sources */,
+				10000000000000000000001A /* AppEnvironment.swift in Sources */,
+				10000000000000000000001B /* AppModel.swift in Sources */,
+				10000000000000000000001C /* WelcomeView.swift in Sources */,
+				10000000000000000000001D /* HabitSetupView.swift in Sources */,
+				10000000000000000000001E /* OnboardingViewModel.swift in Sources */,
+				10000000000000000000001F /* ErrorBanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +474,7 @@
 				10000000000000000000000A /* LocalDayTests.swift in Sources */,
 				10000000000000000000000B /* TetherCalculatorTests.swift in Sources */,
 				100000000000000000000012 /* SwiftDataTetherStoreTests.swift in Sources */,
+				100000000000000000000018 /* OnboardingViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				100000000000000000000005 /* TetherUITests.swift in Sources */,
+				100000000000000000000019 /* OnboardingUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
