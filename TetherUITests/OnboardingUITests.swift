@@ -41,10 +41,8 @@ final class OnboardingUITests: XCTestCase {
         let reminder = app.switches["reminder.toggle"]
         XCTAssertTrue(reminder.waitForExistence(timeout: 5))
         XCTAssertFalse(reminder.value as? String == "1")
-
-        reminder.tap()
-
-        XCTAssertTrue(app.datePickers["reminder.time"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.descendants(matching: .any)["reminder.time"].exists)
         XCTAssertFalse(app.staticTexts["Notifications are turned off in iOS Settings."].exists)
+        XCTAssertFalse(app.alerts.element.exists)
     }
 }

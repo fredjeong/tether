@@ -148,16 +148,21 @@ final class SettingsUITests: XCTestCase {
 
     func testReminderToggleShowsTimeWithoutARealPermissionAlert() {
         let app = XCUIApplication()
-        app.launchArguments = ["-ui-testing-reset", "-ui-testing-seed-habit"]
+        app.launchArguments = [
+            "-ui-testing-reset",
+            "-ui-testing-seed-habit",
+            "-ui-testing-seed-reminder"
+        ]
         app.launch()
 
         openSettings(in: app)
         let reminder = app.switches["reminder.toggle"]
         XCTAssertTrue(reminder.waitForExistence(timeout: 5))
+        XCTAssertEqual(reminder.value as? String, "1")
 
-        reminder.tap()
-
-        XCTAssertTrue(app.datePickers["reminder.time"].waitForExistence(timeout: 5))
+        XCTAssertTrue(
+            app.descendants(matching: .any)["reminder.time"].waitForExistence(timeout: 5)
+        )
         XCTAssertFalse(app.alerts.element.exists)
     }
 

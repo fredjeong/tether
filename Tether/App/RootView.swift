@@ -13,6 +13,11 @@ struct RootView: View {
         if CommandLine.arguments.contains("-ui-testing-reset") {
             environment.reminderSettingsStore.reset()
         }
+        if CommandLine.arguments.contains("-ui-testing-seed-reminder") {
+            environment.reminderSettingsStore.save(
+                ReminderSettings(isEnabled: true, hour: 20, minute: 0)
+            )
+        }
         let appModel = AppModel(environment: environment)
         do {
             try appModel.load()

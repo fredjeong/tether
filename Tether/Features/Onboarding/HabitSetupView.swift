@@ -88,11 +88,14 @@ struct HabitSetupView: View {
                 .accessibilityIdentifier("reminder.toggle")
 
                 if viewModel.isReminderEnabled {
-                    DatePicker(
-                        "Reminder time",
-                        selection: $viewModel.reminderTime,
-                        displayedComponents: .hourAndMinute
-                    )
+                    VStack {
+                        DatePicker(
+                            "Reminder time",
+                            selection: $viewModel.reminderTime,
+                            displayedComponents: .hourAndMinute
+                        )
+                    }
+                    .accessibilityElement(children: .contain)
                     .accessibilityIdentifier("reminder.time")
                 }
 
