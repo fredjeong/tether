@@ -30,6 +30,8 @@ enum AppCopy {
     static let firstCheckInHeadline = "Start your tether today"
     static let todayCompletedMessage = "You're still connected."
     static let changeAction = "Change"
+    static let checkInSaveError = "Couldn't save your check-in. Please try again."
+    static let todayLoadError = "Couldn't load today's check-in. Please try again."
 
     static let reconnectHeadline = "Reconnect today"
     static let reconnectSupportingCopy = "The connection ended, but your habit is still here."

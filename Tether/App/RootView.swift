@@ -34,14 +34,13 @@ struct RootView: View {
             }
         case .main:
             TabView {
-                MainShellPlaceholder(
-                    title: "Today",
-                    message: "Your daily check-in will appear here."
-                )
-                .tabItem {
-                    Label("Today", systemImage: "sun.max")
-                        .accessibilityIdentifier("tab.today")
+                NavigationStack {
+                    TodayView(environment: environment)
                 }
+                    .tabItem {
+                        Label("Today", systemImage: "sun.max")
+                            .accessibilityIdentifier("tab.today")
+                    }
 
                 MainShellPlaceholder(
                     title: AppCopy.historyTitle,

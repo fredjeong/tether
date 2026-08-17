@@ -762,7 +762,7 @@ git commit -m "feat: add Tether onboarding"
 - Produces: TodayViewModel.load(), select(_:), and refresh().
 - Consumes: TetherStore, DayProviding, and TetherCalculator.
 
-- [ ] **Step 1: Write failing TodayViewModel tests**
+- [x] **Step 1: Write failing TodayViewModel tests**
 
 Test with an in-memory store and FixedDayProvider:
 
@@ -774,7 +774,7 @@ Test with an in-memory store and FixedDayProvider:
 - An older record separated by a Missed day yields Reconnect.
 - Store errors do not show a false success state.
 
-- [ ] **Step 2: Write failing Today UI tests**
+- [x] **Step 2: Write failing Today UI tests**
 
 Seed a Habit through launch arguments. Test:
 
@@ -792,11 +792,11 @@ Accessibility identifiers:
 - checkin.change
 - today.error
 
-- [ ] **Step 3: Confirm tests fail**
+- [x] **Step 3: Confirm tests fail**
 
 Run TodayViewModelTests and TodayUITests.
 
-- [ ] **Step 4: Implement TodayViewModel**
+- [x] **Step 4: Implement TodayViewModel**
 
 State:
 
@@ -819,7 +819,7 @@ final class TodayViewModel {
 
 load and select always recompute from persisted check-ins. Never increment a UI counter optimistically.
 
-- [ ] **Step 5: Implement TodayView**
+- [x] **Step 5: Implement TodayView**
 
 Layout order:
 
@@ -839,11 +839,11 @@ Each CheckInButton includes text plus a system symbol:
 
 Do not use a flame.
 
-- [ ] **Step 6: Verify 3-second path**
+- [x] **Step 6: Verify 3-second path**
 
 The normal path after launch must require exactly one tap to save a check-in. There must be no confirmation sheet, note field, or celebration that blocks interaction.
 
-- [ ] **Step 7: Run tests and commit**
+- [x] **Step 7: Run tests and commit**
 
 ~~~bash
 git add Tether/Features/Today Tether/Shared Tether/App/RootView.swift TetherTests/Features/TodayViewModelTests.swift TetherUITests/TodayUITests.swift

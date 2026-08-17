@@ -1,3 +1,4 @@
+import Foundation
 import SwiftData
 import SwiftUI
 
@@ -12,6 +13,17 @@ struct TetherApp: App {
             let store = SwiftDataTetherStore(context: container.mainContext)
             if CommandLine.arguments.contains("-ui-testing-reset") {
                 try store.resetAll()
+            }
+            if CommandLine.arguments.contains("-ui-testing-seed-habit"),
+               try store.loadHabit() == nil {
+                _ = try store.createHabit(
+                    from: HabitDraft(
+                        name: "Workout",
+                        doneMeaning: "A full workout",
+                        lightMeaning: "Move for 10 minutes"
+                    ),
+                    now: Date()
+                )
             }
             self.container = container
             environment = AppEnvironment(
