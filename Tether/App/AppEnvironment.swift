@@ -21,7 +21,11 @@ struct AppEnvironment {
 
     private static func defaultReminderScheduler() -> any ReminderScheduling {
         let environment = ProcessInfo.processInfo.environment
-        if environment["XCTestConfigurationFilePath"] != nil
+        let isUITesting = CommandLine.arguments.contains {
+            $0.hasPrefix("-ui-testing-")
+        }
+        if isUITesting
+            || environment["XCTestConfigurationFilePath"] != nil
             || environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
             return FakeReminderScheduler()
         }
