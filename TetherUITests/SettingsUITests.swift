@@ -103,7 +103,7 @@ final class SettingsUITests: XCTestCase {
 
         app.buttons["settings.reset"].tap()
         assertResetAlert(in: app)
-        app.alerts.buttons["settings.resetConfirm"].tap()
+        app.alerts.buttons.matching(identifier: "settings.resetConfirm").firstMatch.tap()
 
         XCTAssertTrue(
             app.staticTexts["Stay connected to who you want to become."]
