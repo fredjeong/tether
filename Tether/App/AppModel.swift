@@ -49,6 +49,10 @@ final class AppModel {
         isPresentingHabitSetup = false
     }
 
+    func didUpdateHabit(_ habit: Habit) {
+        self.habit = habit
+    }
+
     func didReset() {
         habit = nil
         route = .onboarding

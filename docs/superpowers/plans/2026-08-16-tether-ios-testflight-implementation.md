@@ -970,7 +970,7 @@ git commit -m "feat: add Tether history"
 - Consumes: TetherStore and AppModel.didReset().
 - Task 9 extends SettingsViewModel with reminder properties without changing habit/reset APIs.
 
-- [ ] **Step 1: Write failing SettingsViewModel tests**
+- [x] **Step 1: Write failing SettingsViewModel tests**
 
 Test:
 
@@ -981,7 +981,7 @@ Test:
 - resetAll clears Habit and check-ins then calls AppModel.didReset.
 - reset failure remains in Settings and reports an error.
 
-- [ ] **Step 2: Implement Settings UI**
+- [x] **Step 2: Implement Settings UI**
 
 RootView Today toolbar opens Settings as a sheet. Settings contains:
 
@@ -991,7 +991,7 @@ RootView Today toolbar opens Settings as a sheet. Settings contains:
 
 HabitEditView uses the same limits and copy as onboarding. Save is disabled until valid and changed.
 
-- [ ] **Step 3: Implement reset confirmation**
+- [x] **Step 3: Implement reset confirmation**
 
 Use:
 
@@ -1002,7 +1002,7 @@ Use:
 
 After a successful reset, dismiss Settings and route to Welcome. Do not retain the previous Habit in any feature view model.
 
-- [ ] **Step 4: Add Settings UI tests**
+- [x] **Step 4: Add Settings UI tests**
 
 Test edit persistence and reset routing. Use identifiers:
 
@@ -1012,7 +1012,7 @@ Test edit persistence and reset routing. Use identifiers:
 - settings.resetConfirm
 - settings.version
 
-- [ ] **Step 5: Verify and commit**
+- [x] **Step 5: Verify and commit**
 
 ~~~bash
 git add Tether/Features/Settings Tether/App Tether/Shared/AppCopy.swift TetherTests/Features/SettingsViewModelTests.swift TetherUITests/SettingsUITests.swift

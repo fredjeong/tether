@@ -3,6 +3,7 @@ import SwiftUI
 struct RootView: View {
     private let environment: AppEnvironment
     @State private var appModel: AppModel
+    @State private var isPresentingSettings = false
 
     init(environment: AppEnvironment) {
         self.environment = environment
@@ -36,6 +37,30 @@ struct RootView: View {
             TabView {
                 NavigationStack {
                     TodayView(environment: environment)
+                        .id(appModel.habit?.updatedAt)
+                        .toolbar {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button {
+                                    isPresentingSettings = true
+                                } label: {
+                                    Image(systemName: "gearshape")
+                                }
+                                .accessibilityLabel(AppCopy.settingsTitle)
+                                .accessibilityIdentifier("settings.open")
+                            }
+                        }
+                        .sheet(isPresented: $isPresentingSettings) {
+                            NavigationStack {
+                                SettingsView(
+                                    environment: environment,
+                                    onHabitSaved: appModel.didUpdateHabit,
+                                    onReset: {
+                                        appModel.didReset()
+                                        isPresentingSettings = false
+                                    }
+                                )
+                            }
+                        }
                 }
                     .tabItem {
                         Label("Today", systemImage: "sun.max")
