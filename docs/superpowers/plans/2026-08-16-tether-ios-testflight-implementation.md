@@ -876,7 +876,7 @@ git commit -m "feat: add daily Tether check-in"
 - Produces: HistoryBuilder.build(habit:checkIns:today:calendar:limit:).
 - Consumes: TetherCalculator and TetherStore.
 
-- [ ] **Step 1: Write failing HistoryBuilder tests**
+- [x] **Step 1: Write failing HistoryBuilder tests**
 
 HistoryDay:
 
@@ -899,11 +899,11 @@ Test:
 - Duplicate days choose latest updatedAt consistently with TetherCalculator.
 - No future or pre-creation records are counted.
 
-- [ ] **Step 2: Confirm History tests fail**
+- [x] **Step 2: Confirm History tests fail**
 
 Run only HistoryBuilderTests.
 
-- [ ] **Step 3: Implement HistoryBuilder**
+- [x] **Step 3: Implement HistoryBuilder**
 
 Use one normalized dictionary of day to latest DailyCheckIn, then:
 
@@ -912,7 +912,7 @@ Use one normalized dictionary of day to latest DailyCheckIn, then:
 - Generate reverse day rows from today with Calendar arithmetic.
 - Cap at 30.
 
-- [ ] **Step 4: Implement HistoryViewModel and HistoryView**
+- [x] **Step 4: Implement HistoryViewModel and HistoryView**
 
 HistoryViewModel loads from TetherStore on appearance and when AppModel signals a change.
 
@@ -934,11 +934,11 @@ Accessibility identifiers:
 - history.restCount
 - history.list
 
-- [ ] **Step 5: Write and run a History UI test**
+- [x] **Step 5: Write and run a History UI test**
 
 Seed Done, Light, Rest, and one missing day. Assert each label is visible and Current/Best values match the seed.
 
-- [ ] **Step 6: Run all tests and commit**
+- [x] **Step 6: Run all tests and commit**
 
 ~~~bash
 git add Tether/Core/History Tether/Features/History TetherTests/Core/HistoryBuilderTests.swift TetherTests/Features/HistoryViewModelTests.swift TetherUITests/HistoryUITests.swift Tether/App/RootView.swift

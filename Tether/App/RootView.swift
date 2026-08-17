@@ -42,13 +42,13 @@ struct RootView: View {
                             .accessibilityIdentifier("tab.today")
                     }
 
-                MainShellPlaceholder(
-                    title: AppCopy.historyTitle,
-                    message: "Your habit history will appear here."
-                )
-                .tabItem {
-                    Label(AppCopy.historyTitle, systemImage: "clock")
+                NavigationStack {
+                    HistoryView(environment: environment)
                 }
+                    .tabItem {
+                        Label(AppCopy.historyTitle, systemImage: "clock")
+                            .accessibilityIdentifier("tab.history")
+                    }
             }
         }
     }
@@ -83,21 +83,5 @@ private struct StartupErrorView: View {
             Button(AppCopy.retryAction, action: retry)
         }
         .padding()
-    }
-}
-
-private struct MainShellPlaceholder: View {
-    let title: String
-    let message: String
-
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView(
-                title,
-                systemImage: "circle.dotted",
-                description: Text(message)
-            )
-            .navigationTitle(title)
-        }
     }
 }
