@@ -1,0 +1,53 @@
+name: iOS CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: iOS CI
+    if: ${{ always() }}
+    runs-on: macos-26
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Select Xcode 26.5
+        run: sudo xcode-select -s /Applications/Xcode_26.5.app/Contents/Developer
+
+      - name: Verify toolchain and simulator
+        run: |
+          xcodebuild -version
+          xcrun simctl list devices available | grep -F "iPhone 17 Pro"
+          xcrun simctl list runtimes | grep -F "iOS 26.5"
+
+      - name: Build and test
+        env:
+          RESULT_BUNDLE_PATH: ${{ runner.temp }}/TetherCI.xcresult
+        run: ./scripts/ci-test.sh
+
+      - name: Upload failed test result
+        if: ${{ failure() || cancelled() }}
+        env:
+          RESULT_BUNDLE_PATH: ${{ runner.temp }}/TetherCI.xcresult
+        uses: actions/upload-artifact@v4
+        with:
+          name: tether-test-results-${{ github.run_attempt }}
+          path: ${{ env.RESULT_BUNDLE_PATH }}
+          if-no-files-found: warn
+          retention-days: 7

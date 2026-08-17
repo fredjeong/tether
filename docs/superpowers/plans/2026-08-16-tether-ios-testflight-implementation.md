@@ -290,7 +290,7 @@ protocol ReminderSettingsStoring: AnyObject {
 
 - Produces: CheckInState, Habit, and HabitDraft.
 
-- [ ] **Step 1: Establish the repository and project**
+- [x] **Step 1: Establish the repository and project**
 
 If the workspace still has no Git repository, initialize main and preserve the approved documents:
 
@@ -313,7 +313,7 @@ Create an iOS App project named Tether in the workspace root with:
 Delete generated sample models and ContentView.
 Move the generated Assets.xcassets into Tether/Resources/Assets.xcassets and keep its target membership.
 
-- [ ] **Step 2: Add project-level settings**
+- [x] **Step 2: Add project-level settings**
 
 Set:
 
@@ -327,7 +327,7 @@ Set:
 
 Add .gitignore entries for DerivedData, xcuserdata, .DS_Store, and local signing state.
 
-- [ ] **Step 3: Write failing validation tests**
+- [x] **Step 3: Write failing validation tests**
 
 ~~~swift
 import Testing
@@ -369,7 +369,7 @@ struct HabitDraftTests {
 }
 ~~~
 
-- [ ] **Step 4: Run tests and confirm the expected failure**
+- [x] **Step 4: Run tests and confirm the expected failure**
 
 ~~~bash
 xcodebuild test -project Tether.xcodeproj -scheme Tether -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' -only-testing:TetherTests/HabitDraftTests
@@ -377,7 +377,7 @@ xcodebuild test -project Tether.xcodeproj -scheme Tether -destination 'platform=
 
 Expected: compilation fails because the domain types are not implemented.
 
-- [ ] **Step 5: Implement the domain types**
+- [x] **Step 5: Implement the domain types**
 
 HabitDraft validation must:
 
@@ -389,7 +389,7 @@ HabitDraft validation must:
 
 Create AppCopy as the single location for finalized English strings from PRD section 14. RootView should show a temporary English Tether title only.
 
-- [ ] **Step 6: Verify build and tests**
+- [x] **Step 6: Verify build and tests**
 
 ~~~bash
 xcodebuild build -project Tether.xcodeproj -scheme Tether -destination 'generic/platform=iOS Simulator'
@@ -398,7 +398,7 @@ xcodebuild test -project Tether.xcodeproj -scheme Tether -destination 'platform=
 
 Expected: build succeeds and HabitDraftTests pass.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ~~~bash
 git add .gitignore Tether.xcodeproj Tether TetherTests TetherUITests
@@ -430,11 +430,11 @@ git commit -m "build: scaffold Tether iOS app"
 - Produces: LocalDay, DayProviding, SystemDayProvider, FixedDayProvider, DailyCheckIn, ConnectionPhase, TetherSnapshot, TetherCalculator.snapshot.
 - Consumes: Habit and CheckInState from Task 1.
 
-- [ ] **Step 1: Run the Task 1 test suite**
+- [x] **Step 1: Run the Task 1 test suite**
 
 Use the full TetherTests target and stop if the baseline is not green.
 
-- [ ] **Step 2: Write LocalDay tests**
+- [x] **Step 2: Write LocalDay tests**
 
 Cover:
 
@@ -456,7 +456,7 @@ Example:
 }
 ~~~
 
-- [ ] **Step 3: Write TetherCalculator tests**
+- [x] **Step 3: Write TetherCalculator tests**
 
 Create helpers that build check-ins for exact LocalDay values. Test:
 
@@ -496,11 +496,11 @@ Example:
 }
 ~~~
 
-- [ ] **Step 4: Confirm tests fail**
+- [x] **Step 4: Confirm tests fail**
 
 Run LocalDayTests and TetherCalculatorTests. Expected: compilation failure for missing APIs.
 
-- [ ] **Step 5: Implement LocalDay**
+- [x] **Step 5: Implement LocalDay**
 
 LocalDay must:
 
@@ -512,7 +512,7 @@ LocalDay must:
 
 DayProviding must expose now and calendar. SystemDayProvider uses Date() and Calendar.autoupdatingCurrent. FixedDayProvider is compiled into the app module so feature tests can inject time without changing the device clock.
 
-- [ ] **Step 6: Implement TetherCalculator**
+- [x] **Step 6: Implement TetherCalculator**
 
 Algorithm:
 
@@ -525,7 +525,7 @@ Algorithm:
 7. Otherwise, if yesterday exists, Current is the segment ending yesterday and Active remains pending.
 8. Otherwise, Current is 0 and phase is Reconnect.
 
-- [ ] **Step 7: Verify and commit**
+- [x] **Step 7: Verify and commit**
 
 Run the full TetherTests target, then:
 
@@ -558,7 +558,7 @@ git commit -m "feat: add calendar-safe Tether engine"
 - Produces: TetherSchema.makeContainer(inMemory:).
 - Consumes: Habit, HabitDraft, DailyCheckIn, LocalDay, CheckInState.
 
-- [ ] **Step 1: Add failing in-memory persistence tests**
+- [x] **Step 1: Add failing in-memory persistence tests**
 
 Test:
 
@@ -596,11 +596,11 @@ func upsertChangesStateWithoutDuplicatingDay() throws {
 }
 ~~~
 
-- [ ] **Step 2: Confirm persistence tests fail**
+- [x] **Step 2: Confirm persistence tests fail**
 
 Expected: missing TetherStore and model types.
 
-- [ ] **Step 3: Implement SwiftData models**
+- [x] **Step 3: Implement SwiftData models**
 
 HabitModel fields must mirror Habit. DailyCheckInModel stores:
 
@@ -615,17 +615,17 @@ HabitModel fields must mirror Habit. DailyCheckInModel stores:
 
 Mark uniqueDayKey with @Attribute(.unique). Build it as lowercasedHabitUUID + "|" + LocalDay.storageKey. Do not use a SwiftData relationship for v0.1; habitID is sufficient and keeps reset/fetch behavior explicit.
 
-- [ ] **Step 4: Implement schema and store**
+- [x] **Step 4: Implement schema and store**
 
 TetherSchema.makeContainer(inMemory:) must configure HabitModel and DailyCheckInModel. The app gets a persistent container; tests get isStoredInMemoryOnly true.
 
 Every mutating store method must call ModelContext.save() explicitly and surface errors. resetAll fetches and deletes both model types, then saves.
 
-- [ ] **Step 5: Attach the persistent ModelContainer to the app**
+- [x] **Step 5: Attach the persistent ModelContainer to the app**
 
 TetherApp must create one container for the process and pass its mainContext into SwiftDataTetherStore. Do not use a second container in features.
 
-- [ ] **Step 6: Verify persistence and regression tests**
+- [x] **Step 6: Verify persistence and regression tests**
 
 Run all unit tests twice to expose accidental shared state between tests. Then commit:
 
@@ -659,7 +659,7 @@ git commit -m "feat: persist habits and check-ins with SwiftData"
 - Produces: AppModel.Route.onboarding and AppModel.Route.main.
 - Consumes: TetherStore, HabitDraft, SystemDayProvider, AppCopy.
 
-- [ ] **Step 1: Write failing OnboardingViewModel tests**
+- [x] **Step 1: Write failing OnboardingViewModel tests**
 
 Test:
 
@@ -669,7 +669,7 @@ Test:
 - storage errors set user-visible error text and do not route to main.
 - a pre-existing Habit routes RootView directly to main.
 
-- [ ] **Step 2: Add one failing onboarding UI test**
+- [x] **Step 2: Add one failing onboarding UI test**
 
 Launch with argument -ui-testing-reset. Assert:
 
@@ -687,11 +687,11 @@ Give fields stable accessibility identifiers:
 - habit.submit
 - tab.today
 
-- [ ] **Step 3: Confirm tests fail**
+- [x] **Step 3: Confirm tests fail**
 
 Run OnboardingViewModelTests and OnboardingUITests.
 
-- [ ] **Step 4: Implement AppModel and routing**
+- [x] **Step 4: Implement AppModel and routing**
 
 AppModel loads one Habit at startup:
 
@@ -715,7 +715,7 @@ final class AppModel {
 
 RootView displays onboarding when no Habit exists. Main is a TabView whose initial Today and History destinations clearly identify the upcoming features without exposing broken controls; Tasks 5 and 6 replace those destinations. Settings is opened from a toolbar button added in Task 7.
 
-- [ ] **Step 5: Implement Welcome and Habit Setup**
+- [x] **Step 5: Implement Welcome and Habit Setup**
 
 Use the exact PRD copy. Welcome is one screen, not a carousel. HabitSetup:
 
@@ -725,11 +725,11 @@ Use the exact PRD copy. Welcome is one screen, not a carousel. HabitSetup:
 - Shows a neutral ErrorBanner if saving fails.
 - Does not include reminder controls yet; Task 9 adds them after the notification service exists.
 
-- [ ] **Step 6: Add deterministic UI-test reset**
+- [x] **Step 6: Add deterministic UI-test reset**
 
 Only when the launch argument -ui-testing-reset exists, clear the test container before RootView loads. This path must not be exposed in normal UI.
 
-- [ ] **Step 7: Verify and commit**
+- [x] **Step 7: Verify and commit**
 
 Run unit tests, onboarding UI test, and app build. Then:
 
