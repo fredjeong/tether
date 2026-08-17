@@ -82,8 +82,8 @@ struct RootView: View {
 
                 NavigationStack {
                     HistoryView(environment: environment)
+                        .id("\(appModel.habit?.updatedAt.timeIntervalSinceReferenceDate ?? 0)-\(appModel.lifecycleRefreshID)")
                 }
-                .id("\(appModel.habit?.updatedAt.timeIntervalSinceReferenceDate ?? 0)-\(appModel.lifecycleRefreshID)")
                 .tabItem {
                     Label(AppCopy.historyTitle, systemImage: "clock")
                         .accessibilityIdentifier("tab.history")
