@@ -558,7 +558,7 @@ git commit -m "feat: add calendar-safe Tether engine"
 - Produces: TetherSchema.makeContainer(inMemory:).
 - Consumes: Habit, HabitDraft, DailyCheckIn, LocalDay, CheckInState.
 
-- [ ] **Step 1: Add failing in-memory persistence tests**
+- [x] **Step 1: Add failing in-memory persistence tests**
 
 Test:
 
@@ -596,11 +596,11 @@ func upsertChangesStateWithoutDuplicatingDay() throws {
 }
 ~~~
 
-- [ ] **Step 2: Confirm persistence tests fail**
+- [x] **Step 2: Confirm persistence tests fail**
 
 Expected: missing TetherStore and model types.
 
-- [ ] **Step 3: Implement SwiftData models**
+- [x] **Step 3: Implement SwiftData models**
 
 HabitModel fields must mirror Habit. DailyCheckInModel stores:
 
@@ -615,17 +615,17 @@ HabitModel fields must mirror Habit. DailyCheckInModel stores:
 
 Mark uniqueDayKey with @Attribute(.unique). Build it as lowercasedHabitUUID + "|" + LocalDay.storageKey. Do not use a SwiftData relationship for v0.1; habitID is sufficient and keeps reset/fetch behavior explicit.
 
-- [ ] **Step 4: Implement schema and store**
+- [x] **Step 4: Implement schema and store**
 
 TetherSchema.makeContainer(inMemory:) must configure HabitModel and DailyCheckInModel. The app gets a persistent container; tests get isStoredInMemoryOnly true.
 
 Every mutating store method must call ModelContext.save() explicitly and surface errors. resetAll fetches and deletes both model types, then saves.
 
-- [ ] **Step 5: Attach the persistent ModelContainer to the app**
+- [x] **Step 5: Attach the persistent ModelContainer to the app**
 
 TetherApp must create one container for the process and pass its mainContext into SwiftDataTetherStore. Do not use a second container in features.
 
-- [ ] **Step 6: Verify persistence and regression tests**
+- [x] **Step 6: Verify persistence and regression tests**
 
 Run all unit tests twice to expose accidental shared state between tests. Then commit:
 

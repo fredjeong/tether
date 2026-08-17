@@ -24,6 +24,12 @@
 		10000000000000000000000F /* ConnectionPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000012 /* ConnectionPhase.swift */; };
 		100000000000000000000010 /* TetherSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000013 /* TetherSnapshot.swift */; };
 		100000000000000000000011 /* TetherCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000014 /* TetherCalculator.swift */; };
+		100000000000000000000012 /* SwiftDataTetherStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000015 /* SwiftDataTetherStoreTests.swift */; };
+		100000000000000000000013 /* HabitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000016 /* HabitModel.swift */; };
+		100000000000000000000014 /* DailyCheckInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000017 /* DailyCheckInModel.swift */; };
+		100000000000000000000015 /* TetherSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000018 /* TetherSchema.swift */; };
+		100000000000000000000016 /* TetherStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000019 /* TetherStore.swift */; };
+		100000000000000000000017 /* SwiftDataTetherStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000001A /* SwiftDataTetherStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +70,12 @@
 		110000000000000000000012 /* ConnectionPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionPhase.swift; sourceTree = "<group>"; };
 		110000000000000000000013 /* TetherSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherSnapshot.swift; sourceTree = "<group>"; };
 		110000000000000000000014 /* TetherCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherCalculator.swift; sourceTree = "<group>"; };
+		110000000000000000000015 /* SwiftDataTetherStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTetherStoreTests.swift; sourceTree = "<group>"; };
+		110000000000000000000016 /* HabitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitModel.swift; sourceTree = "<group>"; };
+		110000000000000000000017 /* DailyCheckInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCheckInModel.swift; sourceTree = "<group>"; };
+		110000000000000000000018 /* TetherSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherSchema.swift; sourceTree = "<group>"; };
+		110000000000000000000019 /* TetherStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetherStore.swift; sourceTree = "<group>"; };
+		11000000000000000000001A /* SwiftDataTetherStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTetherStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +118,7 @@
 			children = (
 				140000000000000000000003 /* App */,
 				140000000000000000000009 /* Core */,
+				140000000000000000000010 /* Data */,
 				14000000000000000000000C /* Shared */,
 				140000000000000000000004 /* Resources */,
 			);
@@ -133,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				140000000000000000000006 /* Core */,
+				14000000000000000000000F /* Data */,
 			);
 			path = TetherTests;
 			sourceTree = "<group>";
@@ -219,6 +233,34 @@
 				110000000000000000000014 /* TetherCalculator.swift */,
 			);
 			path = Tether;
+			sourceTree = "<group>";
+		};
+		14000000000000000000000F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000015 /* SwiftDataTetherStoreTests.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		140000000000000000000010 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				140000000000000000000011 /* Models */,
+				110000000000000000000018 /* TetherSchema.swift */,
+				110000000000000000000019 /* TetherStore.swift */,
+				11000000000000000000001A /* SwiftDataTetherStore.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		140000000000000000000011 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				110000000000000000000016 /* HabitModel.swift */,
+				110000000000000000000017 /* DailyCheckInModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,6 +404,11 @@
 				10000000000000000000000F /* ConnectionPhase.swift in Sources */,
 				100000000000000000000010 /* TetherSnapshot.swift in Sources */,
 				100000000000000000000011 /* TetherCalculator.swift in Sources */,
+				100000000000000000000013 /* HabitModel.swift in Sources */,
+				100000000000000000000014 /* DailyCheckInModel.swift in Sources */,
+				100000000000000000000015 /* TetherSchema.swift in Sources */,
+				100000000000000000000016 /* TetherStore.swift in Sources */,
+				100000000000000000000017 /* SwiftDataTetherStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +419,7 @@
 				100000000000000000000004 /* HabitDraftTests.swift in Sources */,
 				10000000000000000000000A /* LocalDayTests.swift in Sources */,
 				10000000000000000000000B /* TetherCalculatorTests.swift in Sources */,
+				100000000000000000000012 /* SwiftDataTetherStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
