@@ -18,6 +18,8 @@ final class AppModel {
     private(set) var habit: Habit?
     private(set) var isPresentingHabitSetup = false
     private(set) var startupErrorMessage: String?
+    private(set) var reminderErrorMessage: String?
+    private(set) var lifecycleRefreshID = 0
 
     var rootContent: RootContent {
         if startupErrorMessage != nil {
@@ -27,6 +29,8 @@ final class AppModel {
     }
 
     private let environment: AppEnvironment
+    private var isRefreshingForCurrentDay = false
+    private var needsCurrentDayRefresh = false
 
     init(environment: AppEnvironment) {
         self.environment = environment
@@ -65,5 +69,50 @@ final class AppModel {
 
     func dismissHabitSetup() {
         isPresentingHabitSetup = false
+    }
+
+    func setReminderError(_ message: String?) {
+        reminderErrorMessage = message
+    }
+
+    func refreshForCurrentDay() async {
+        guard !isRefreshingForCurrentDay else {
+            needsCurrentDayRefresh = true
+            return
+        }
+
+        repeat {
+            isRefreshingForCurrentDay = true
+            needsCurrentDayRefresh = false
+            await refreshPersistedStateAndReminders()
+            isRefreshingForCurrentDay = false
+        } while needsCurrentDayRefresh
+    }
+
+    private func refreshPersistedStateAndReminders() async {
+        do {
+            try load()
+            lifecycleRefreshID += 1
+            guard let habit else {
+                return
+            }
+
+            let settings = environment.reminderSettingsStore.load()
+            guard settings.isEnabled else {
+                return
+            }
+            let checkedDays = Set(
+                try environment.store.loadCheckIns(habitID: habit.id).map(\.day)
+            )
+            try await environment.reminderScheduler.reconcile(
+                settings: settings,
+                now: environment.dayProvider.now,
+                calendar: environment.dayProvider.calendar,
+                checkedDays: checkedDays
+            )
+            reminderErrorMessage = nil
+        } catch {
+            reminderErrorMessage = "Couldn't update your reminder. Please try again."
+        }
     }
 }

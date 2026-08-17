@@ -70,7 +70,7 @@ final class SettingsUITests: XCTestCase {
         )
 
         app.terminate()
-        app.launchArguments = []
+        app.launchArguments = ["-ui-testing-runtime"]
         app.launch()
 
         XCTAssertTrue(app.staticTexts["Training"].waitForExistence(timeout: 5))
@@ -112,7 +112,7 @@ final class SettingsUITests: XCTestCase {
         XCTAssertFalse(app.tabBars.buttons["tab.history"].exists)
 
         app.terminate()
-        app.launchArguments = []
+        app.launchArguments = ["-ui-testing-runtime"]
         app.launch()
 
         XCTAssertTrue(
@@ -144,6 +144,21 @@ final class SettingsUITests: XCTestCase {
             "Rest, 0",
             for: app.descendants(matching: .any)["history.restCount"]
         )
+    }
+
+    func testReminderToggleShowsTimeWithoutARealPermissionAlert() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-ui-testing-reset", "-ui-testing-seed-habit"]
+        app.launch()
+
+        openSettings(in: app)
+        let reminder = app.switches["reminder.toggle"]
+        XCTAssertTrue(reminder.waitForExistence(timeout: 5))
+
+        reminder.tap()
+
+        XCTAssertTrue(app.datePickers["reminder.time"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.alerts.element.exists)
     }
 
     private func openSettings(in app: XCUIApplication) {

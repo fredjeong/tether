@@ -1,12 +1,18 @@
+import Foundation
 import SwiftUI
 
 struct RootView: View {
     private let environment: AppEnvironment
+    @Environment(\.scenePhase) private var scenePhase
     @State private var appModel: AppModel
     @State private var isPresentingSettings = false
+    @State private var lifecycleRefreshTask: Task<Void, Never>?
 
     init(environment: AppEnvironment) {
         self.environment = environment
+        if CommandLine.arguments.contains("-ui-testing-reset") {
+            environment.reminderSettingsStore.reset()
+        }
         let appModel = AppModel(environment: environment)
         do {
             try appModel.load()
@@ -29,7 +35,8 @@ struct RootView: View {
                 .navigationDestination(isPresented: habitSetupPresentation) {
                     HabitSetupView(
                         environment: environment,
-                        onCreated: appModel.didCreateHabit
+                        onCreated: appModel.didCreateHabit,
+                        onReminderError: appModel.setReminderError
                     )
                 }
             }
@@ -37,7 +44,7 @@ struct RootView: View {
             TabView {
                 NavigationStack {
                     TodayView(environment: environment)
-                        .id(appModel.habit?.updatedAt)
+                        .id("\(appModel.habit?.updatedAt.timeIntervalSinceReferenceDate ?? 0)-\(appModel.lifecycleRefreshID)")
                         .toolbar {
                             ToolbarItem(placement: .topBarTrailing) {
                                 Button {
@@ -62,18 +69,37 @@ struct RootView: View {
                             }
                         }
                 }
-                    .tabItem {
-                        Label("Today", systemImage: "sun.max")
-                            .accessibilityIdentifier("tab.today")
-                    }
+                .tabItem {
+                    Label("Today", systemImage: "sun.max")
+                        .accessibilityIdentifier("tab.today")
+                }
 
                 NavigationStack {
                     HistoryView(environment: environment)
                 }
-                    .tabItem {
-                        Label(AppCopy.historyTitle, systemImage: "clock")
-                            .accessibilityIdentifier("tab.history")
-                    }
+                .tabItem {
+                    Label(AppCopy.historyTitle, systemImage: "clock")
+                        .accessibilityIdentifier("tab.history")
+                }
+            }
+            .overlay(alignment: .top) {
+                if let reminderErrorMessage = appModel.reminderErrorMessage {
+                    ErrorBanner(message: reminderErrorMessage)
+                        .padding()
+                }
+            }
+            .onAppear(perform: refreshForLifecycleEvent)
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active {
+                    refreshForLifecycleEvent()
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged)) { _ in
+                refreshForLifecycleEvent()
+            }
+            .onDisappear {
+                lifecycleRefreshTask?.cancel()
+                lifecycleRefreshTask = nil
             }
         }
     }
@@ -95,6 +121,16 @@ struct RootView: View {
                 }
             }
         )
+    }
+
+    private func refreshForLifecycleEvent() {
+        lifecycleRefreshTask?.cancel()
+        lifecycleRefreshTask = Task { @MainActor in
+            guard !Task.isCancelled else {
+                return
+            }
+            await appModel.refreshForCurrentDay()
+        }
     }
 }
 

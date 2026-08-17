@@ -40,6 +40,7 @@ final class TodayViewModel {
     }
 
     private let environment: AppEnvironment
+    private var reminderReconciliationTask: Task<Void, Never>?
 
     init(environment: AppEnvironment) {
         self.environment = environment
@@ -59,6 +60,20 @@ final class TodayViewModel {
     }
 
     func select(_ state: CheckInState) {
+        guard saveSelection(state) else {
+            return
+        }
+        reminderReconciliationTask = Task { @MainActor in
+            await reconcileReminderAfterCheckIn()
+        }
+    }
+
+    func selectAndReconcile(_ state: CheckInState) async {
+        select(state)
+        await reminderReconciliationTask?.value
+    }
+
+    private func saveSelection(_ state: CheckInState) -> Bool {
         do {
             let storedHabit = try environment.store.loadHabit()
             guard let storedHabit else {
@@ -77,9 +92,35 @@ final class TodayViewModel {
             )
             try reloadPersistedState()
             errorMessage = nil
+            return true
         } catch {
             try? reloadPersistedState()
             errorMessage = AppCopy.checkInSaveError
+            return false
+        }
+    }
+
+    private func reconcileReminderAfterCheckIn() async {
+        let settings = environment.reminderSettingsStore.load()
+        guard settings.isEnabled else {
+            return
+        }
+
+        do {
+            guard let storedHabit = try environment.store.loadHabit() else {
+                throw TetherStoreError.habitNotFound
+            }
+            let checkedDays = Set(
+                try environment.store.loadCheckIns(habitID: storedHabit.id).map(\.day)
+            )
+            try await environment.reminderScheduler.reconcile(
+                settings: settings,
+                now: environment.dayProvider.now,
+                calendar: environment.dayProvider.calendar,
+                checkedDays: checkedDays
+            )
+        } catch {
+            errorMessage = "Couldn't update your reminder. Please try again."
         }
     }
 

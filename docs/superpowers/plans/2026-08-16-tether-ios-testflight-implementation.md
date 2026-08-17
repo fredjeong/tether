@@ -1126,7 +1126,7 @@ git commit -m "feat: add local reminder service"
 - Consumes: ReminderScheduling, ReminderSettingsStoring, TetherStore, DayProviding.
 - Does not expose UserNotifications types to views.
 
-- [ ] **Step 1: Write failing reminder integration tests**
+- [x] **Step 1: Write failing reminder integration tests**
 
 Test:
 
@@ -1140,7 +1140,7 @@ Test:
 - Reset clears reminder settings and cancels all.
 - Foreground refresh reloads Today and reconciles the rolling window.
 
-- [ ] **Step 2: Extend onboarding**
+- [x] **Step 2: Extend onboarding**
 
 Add optional Daily reminder toggle and time picker. Turning it on requests permission. Habit creation must still succeed if notification scheduling fails; show the scheduling error after entering the main app and keep reminder disabled.
 
@@ -1151,7 +1151,7 @@ Accessibility identifiers:
 - reminder.permissionMessage
 - reminder.openSettings
 
-- [ ] **Step 3: Extend Settings**
+- [x] **Step 3: Extend Settings**
 
 Add Reminder section:
 
@@ -1162,7 +1162,7 @@ Add Reminder section:
 
 Opening iOS Settings uses UIApplication.openSettingsURLString.
 
-- [ ] **Step 4: Integrate Today and lifecycle**
+- [x] **Step 4: Integrate Today and lifecycle**
 
 After a successful check-in:
 
@@ -1177,11 +1177,11 @@ On scenePhase active and NSCalendarDayChanged:
 - Refresh History on its next appearance.
 - Reconcile reminders.
 
-- [ ] **Step 5: Update UI tests**
+- [x] **Step 5: Update UI tests**
 
 UI tests must use FakeReminderScheduler through launch configuration; do not automate the system permission alert in the full suite. Add one narrowly scoped permission-alert test if the simulator supports resetting notification permissions deterministically.
 
-- [ ] **Step 6: Verify and commit**
+- [x] **Step 6: Verify and commit**
 
 ~~~bash
 git add Tether/Features Tether/App TetherTests/Features/ReminderIntegrationTests.swift TetherUITests

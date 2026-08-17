@@ -67,6 +67,7 @@
 		10000000000000000000003A /* ReminderSettingsStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000003D /* ReminderSettingsStoring.swift */; };
 		10000000000000000000003B /* UserDefaultsReminderSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000003E /* UserDefaultsReminderSettingsStore.swift */; };
 		10000000000000000000003C /* UserNotificationReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000003F /* UserNotificationReminderScheduler.swift */; };
+		10000000000000000000003D /* ReminderIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000040 /* ReminderIntegrationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,7 @@
 		11000000000000000000003D /* ReminderSettingsStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSettingsStoring.swift; sourceTree = "<group>"; };
 		11000000000000000000003E /* UserDefaultsReminderSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsReminderSettingsStore.swift; sourceTree = "<group>"; };
 		11000000000000000000003F /* UserNotificationReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationReminderScheduler.swift; sourceTree = "<group>"; };
+		110000000000000000000040 /* ReminderIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderIntegrationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +349,7 @@
 				110000000000000000000023 /* TodayViewModelTests.swift */,
 				11000000000000000000002C /* HistoryViewModelTests.swift */,
 				110000000000000000000031 /* SettingsViewModelTests.swift */,
+				110000000000000000000040 /* ReminderIntegrationTests.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				10000000000000000000002E /* SettingsViewModelTests.swift in Sources */,
 				100000000000000000000033 /* ReminderPlanBuilderTests.swift in Sources */,
 				100000000000000000000034 /* UserDefaultsReminderSettingsStoreTests.swift in Sources */,
+				10000000000000000000003D /* ReminderIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
