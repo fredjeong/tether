@@ -145,28 +145,29 @@ struct RootView: View {
     }
 }
 
-private struct TabAccessibilityIdentifierConfigurator: UIViewControllerRepresentable {
+private struct TabAccessibilityIdentifierConfigurator: UIViewRepresentable {
     let identifiers: [String]
 
-    func makeUIViewController(context: Context) -> ConfiguratorViewController {
-        ConfiguratorViewController(identifiers: identifiers)
+    func makeUIView(context: Context) -> ConfiguratorView {
+        ConfiguratorView(identifiers: identifiers)
     }
 
-    func updateUIViewController(
-        _ viewController: ConfiguratorViewController,
+    func updateUIView(
+        _ view: ConfiguratorView,
         context: Context
     ) {
-        viewController.identifiers = identifiers
-        viewController.configureIdentifiers()
+        view.identifiers = identifiers
+        view.configureIdentifiers()
     }
 
     @MainActor
-    final class ConfiguratorViewController: UIViewController {
+    final class ConfiguratorView: UIView {
         var identifiers: [String]
 
         init(identifiers: [String]) {
             self.identifiers = identifiers
-            super.init(nibName: nil, bundle: nil)
+            super.init(frame: .zero)
+            isUserInteractionEnabled = false
         }
 
         @available(*, unavailable)
@@ -174,19 +175,19 @@ private struct TabAccessibilityIdentifierConfigurator: UIViewControllerRepresent
             fatalError("init(coder:) has not been implemented")
         }
 
-        override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
             configureIdentifiers()
         }
 
-        override func viewDidLayoutSubviews() {
-            super.viewDidLayoutSubviews()
+        override func layoutSubviews() {
+            super.layoutSubviews()
             configureIdentifiers()
         }
 
         func configureIdentifiers() {
             guard let tabBarController = findTabBarController(
-                from: view.window?.rootViewController
+                from: window?.rootViewController
             ) else {
                 return
             }
