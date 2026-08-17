@@ -83,16 +83,22 @@ struct RootView: View {
                 NavigationStack {
                     HistoryView(environment: environment)
                 }
+                .id("\(appModel.habit?.updatedAt.timeIntervalSinceReferenceDate ?? 0)-\(appModel.lifecycleRefreshID)")
                 .tabItem {
                     Label(AppCopy.historyTitle, systemImage: "clock")
                         .accessibilityIdentifier("tab.history")
                 }
             }
             .overlay(alignment: .top) {
-                if let reminderErrorMessage = appModel.reminderErrorMessage {
-                    ErrorBanner(message: reminderErrorMessage)
-                        .padding()
+                VStack(spacing: 8) {
+                    if let persistenceErrorMessage = appModel.persistenceErrorMessage {
+                        ErrorBanner(message: persistenceErrorMessage)
+                    }
+                    if let reminderErrorMessage = appModel.reminderErrorMessage {
+                        ErrorBanner(message: reminderErrorMessage)
+                    }
                 }
+                .padding()
             }
             .background(
                 TabAccessibilityIdentifierConfigurator(

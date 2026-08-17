@@ -1212,7 +1212,7 @@ git commit -m "feat: connect reminders to daily flow"
 - No public interface changes.
 - Any production fix begins with a failing regression test.
 
-- [ ] **Step 1: Add failing lifecycle regression tests**
+- [x] **Step 1: Add failing lifecycle regression tests**
 
 Cover:
 
@@ -1224,11 +1224,11 @@ Cover:
 - Notification scheduling failure never rolls back a saved check-in.
 - Reset failure does not route away from Settings.
 
-- [ ] **Step 2: Add a deterministic lifecycle test harness**
+- [x] **Step 2: Add a deterministic lifecycle test harness**
 
 Use FixedDayProvider with a mutable now/calendar test implementation. Route scene activation and NSCalendarDayChanged through one AppModel.refreshForCurrentDay() method so tests do not need NotificationCenter.
 
-- [ ] **Step 3: Implement the smallest fixes**
+- [x] **Step 3: Implement the smallest fixes**
 
 On every refresh:
 
@@ -1251,7 +1251,7 @@ With debug launch arguments:
 
 Do not ship a hidden time-travel UI; the injection path is test/debug-only.
 
-- [ ] **Step 5: Verify and commit**
+- [x] **Step 5: Verify and commit**
 
 Run all unit and integration tests plus Today and History UI tests. Then:
 

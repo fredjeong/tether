@@ -71,6 +71,21 @@ struct LocalDayTests {
         ])
     }
 
+    @Test func usesTheCurrentTimeZoneForNewDaysWithoutChangingExistingValues() throws {
+        let instant = Date(timeIntervalSince1970: 1_786_982_400)
+        var seoul = Calendar(identifier: .gregorian)
+        seoul.timeZone = try #require(TimeZone(identifier: "Asia/Seoul"))
+        var losAngeles = Calendar(identifier: .gregorian)
+        losAngeles.timeZone = try #require(TimeZone(identifier: "America/Los_Angeles"))
+
+        let storedDay = LocalDay(date: instant, calendar: seoul)
+        let newDay = LocalDay(date: instant, calendar: losAngeles)
+
+        #expect(storedDay == LocalDay(era: 1, year: 2026, month: 8, day: 18))
+        #expect(newDay == LocalDay(era: 1, year: 2026, month: 8, day: 17))
+        #expect(storedDay.storageKey == "1-2026-08-18")
+    }
+
     private func utcCalendar() -> Calendar {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!

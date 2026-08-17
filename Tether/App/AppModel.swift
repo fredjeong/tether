@@ -18,6 +18,7 @@ final class AppModel {
     private(set) var habit: Habit?
     private(set) var isPresentingHabitSetup = false
     private(set) var startupErrorMessage: String?
+    private(set) var persistenceErrorMessage: String?
     private(set) var reminderErrorMessage: String?
     private(set) var lifecycleRefreshID = 0
 
@@ -90,24 +91,48 @@ final class AppModel {
     }
 
     private func refreshPersistedStateAndReminders() async {
+        let now = environment.dayProvider.now
+        let calendar = environment.dayProvider.calendar
+
+        let loadedHabit: Habit
+        let checkedDays: Set<LocalDay>
         do {
-            try load()
-            lifecycleRefreshID += 1
-            guard let habit else {
+            guard let persistedHabit = try environment.store.loadHabit() else {
+                habit = nil
+                route = .onboarding
+                startupErrorMessage = nil
+                persistenceErrorMessage = nil
+                reminderErrorMessage = nil
+                lifecycleRefreshID += 1
                 return
             }
 
-            let settings = environment.reminderSettingsStore.load()
-            guard settings.isEnabled else {
-                return
-            }
-            let checkedDays = Set(
-                try environment.store.loadCheckIns(habitID: habit.id).map(\.day)
+            loadedHabit = persistedHabit
+            checkedDays = Set(
+                try environment.store.loadCheckIns(habitID: persistedHabit.id).map(\.day)
             )
+            habit = loadedHabit
+            route = .main
+            startupErrorMessage = nil
+            persistenceErrorMessage = nil
+            lifecycleRefreshID += 1
+        } catch {
+            persistenceErrorMessage = AppCopy.todayLoadError
+            lifecycleRefreshID += 1
+            return
+        }
+
+        let settings = environment.reminderSettingsStore.load()
+        guard settings.isEnabled else {
+            reminderErrorMessage = nil
+            return
+        }
+
+        do {
             try await environment.reminderScheduler.reconcile(
                 settings: settings,
-                now: environment.dayProvider.now,
-                calendar: environment.dayProvider.calendar,
+                now: now,
+                calendar: calendar,
                 checkedDays: checkedDays
             )
             reminderErrorMessage = nil
