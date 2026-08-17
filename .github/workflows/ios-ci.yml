@@ -22,8 +22,6 @@ jobs:
     if: ${{ always() }}
     runs-on: macos-26
     timeout-minutes: 30
-    env:
-      RESULT_BUNDLE_PATH: ${{ runner.temp }}/TetherCI.xcresult
 
     steps:
       - name: Check out repository
@@ -39,10 +37,14 @@ jobs:
           xcrun simctl list runtimes | grep -F "iOS 26.5"
 
       - name: Build and test
+        env:
+          RESULT_BUNDLE_PATH: ${{ runner.temp }}/TetherCI.xcresult
         run: ./scripts/ci-test.sh
 
       - name: Upload failed test result
         if: ${{ failure() || cancelled() }}
+        env:
+          RESULT_BUNDLE_PATH: ${{ runner.temp }}/TetherCI.xcresult
         uses: actions/upload-artifact@v4
         with:
           name: tether-test-results-${{ github.run_attempt }}
