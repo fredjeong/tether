@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIKit
 
 struct RootView: View {
     private let environment: AppEnvironment
@@ -93,6 +94,11 @@ struct RootView: View {
                         .padding()
                 }
             }
+            .background(
+                TabAccessibilityIdentifierConfigurator(
+                    identifiers: ["tab.today", "tab.history"]
+                )
+            )
             .onAppear(perform: refreshForLifecycleEvent)
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
@@ -135,6 +141,89 @@ struct RootView: View {
                 return
             }
             await appModel.refreshForCurrentDay()
+        }
+    }
+}
+
+private struct TabAccessibilityIdentifierConfigurator: UIViewControllerRepresentable {
+    let identifiers: [String]
+
+    func makeUIViewController(context: Context) -> ConfiguratorViewController {
+        ConfiguratorViewController(identifiers: identifiers)
+    }
+
+    func updateUIViewController(
+        _ viewController: ConfiguratorViewController,
+        context: Context
+    ) {
+        viewController.identifiers = identifiers
+        viewController.configureIdentifiers()
+    }
+
+    @MainActor
+    final class ConfiguratorViewController: UIViewController {
+        var identifiers: [String]
+
+        init(identifiers: [String]) {
+            self.identifiers = identifiers
+            super.init(nibName: nil, bundle: nil)
+        }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            configureIdentifiers()
+        }
+
+        override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
+            configureIdentifiers()
+        }
+
+        func configureIdentifiers() {
+            guard let tabBarController = findTabBarController(
+                from: view.window?.rootViewController
+            ) else {
+                return
+            }
+
+            if #available(iOS 18.0, *) {
+                for (tab, identifier) in zip(tabBarController.tabs, identifiers)
+                where tab.accessibilityIdentifier != identifier {
+                    tab.accessibilityIdentifier = identifier
+                }
+            }
+
+            for (item, identifier) in zip(
+                tabBarController.tabBar.items ?? [],
+                identifiers
+            ) where item.accessibilityIdentifier != identifier {
+                item.accessibilityIdentifier = identifier
+            }
+        }
+
+        private func findTabBarController(
+            from viewController: UIViewController?
+        ) -> UITabBarController? {
+            guard let viewController else {
+                return nil
+            }
+            if let tabBarController = viewController as? UITabBarController {
+                return tabBarController
+            }
+            for child in viewController.children {
+                if let tabBarController = findTabBarController(from: child) {
+                    return tabBarController
+                }
+            }
+            if let presentedViewController = viewController.presentedViewController {
+                return findTabBarController(from: presentedViewController)
+            }
+            return nil
         }
     }
 }
