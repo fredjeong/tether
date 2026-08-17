@@ -25,7 +25,6 @@ struct CheckInButton: View {
             .padding(.vertical, 8)
         }
         .buttonStyle(.bordered)
-        .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(state.title), \(state.helper)")
         .accessibilityIdentifier(state.buttonIdentifier)
     }
