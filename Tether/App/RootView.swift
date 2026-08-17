@@ -7,12 +7,19 @@ struct RootView: View {
     init(environment: AppEnvironment) {
         self.environment = environment
         let appModel = AppModel(environment: environment)
-        try? appModel.load()
+        do {
+            try appModel.load()
+        } catch {}
         _appModel = State(initialValue: appModel)
     }
 
     var body: some View {
-        switch appModel.route {
+        switch appModel.rootContent {
+        case .startupError:
+            StartupErrorView(
+                message: appModel.startupErrorMessage ?? AppCopy.startupLoadError,
+                retry: { load(appModel) }
+            )
         case .onboarding:
             NavigationStack {
                 WelcomeView {
@@ -47,6 +54,12 @@ struct RootView: View {
         }
     }
 
+    private func load(_ appModel: AppModel) {
+        do {
+            try appModel.load()
+        } catch {}
+    }
+
     private var habitSetupPresentation: Binding<Bool> {
         Binding(
             get: { appModel.isPresentingHabitSetup },
@@ -58,6 +71,19 @@ struct RootView: View {
                 }
             }
         )
+    }
+}
+
+private struct StartupErrorView: View {
+    let message: String
+    let retry: () -> Void
+
+    var body: some View {
+        VStack(spacing: 16) {
+            ErrorBanner(message: message)
+            Button(AppCopy.retryAction, action: retry)
+        }
+        .padding()
     }
 }
 

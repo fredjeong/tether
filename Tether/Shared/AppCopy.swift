@@ -16,6 +16,8 @@ enum AppCopy {
     static let dailyReminderLabel = "Daily reminder"
     static let habitSetupSubmitAction = "Start my tether"
     static let habitSaveError = "Couldn't save your habit. Please try again."
+    static let startupLoadError = "Couldn't load your habit. Please try again."
+    static let retryAction = "Retry"
 
     static let todayPrompt = "How was today?"
     static let doneLabel = "Done"

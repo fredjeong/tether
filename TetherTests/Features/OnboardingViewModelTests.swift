@@ -85,6 +85,38 @@ struct OnboardingViewModelTests {
     }
 
     @Test
+    func startupLoadFailureShowsErrorInsteadOfOnboardingAndRetryClearsIt() throws {
+        let existingHabit = Habit(
+            id: UUID(),
+            name: "Workout",
+            doneMeaning: "A full workout",
+            lightMeaning: "Move for 10 minutes",
+            createdAt: .distantPast,
+            updatedAt: .distantPast
+        )
+        let fixture = OnboardingFixture(
+            existingHabit: existingHabit,
+            loadError: .unavailable
+        )
+        let appModel = AppModel(environment: fixture.environment)
+
+        #expect(throws: OnboardingStore.StorageError.unavailable) {
+            try appModel.load()
+        }
+
+        #expect(appModel.startupErrorMessage == AppCopy.startupLoadError)
+        #expect(appModel.rootContent == .startupError)
+
+        fixture.store.loadError = nil
+
+        try appModel.load()
+
+        #expect(appModel.startupErrorMessage == nil)
+        #expect(appModel.rootContent == .main)
+        expectMain(appModel)
+    }
+
+    @Test
     func completingOrResettingOnboardingClearsHabitSetupPresentation() throws {
         let existingHabit = Habit(
             id: UUID(),
@@ -138,9 +170,14 @@ private final class OnboardingFixture {
 
     init(
         existingHabit: Habit? = nil,
-        createError: OnboardingStore.StorageError? = nil
+        createError: OnboardingStore.StorageError? = nil,
+        loadError: OnboardingStore.StorageError? = nil
     ) {
-        store = OnboardingStore(existingHabit: existingHabit, createError: createError)
+        store = OnboardingStore(
+            existingHabit: existingHabit,
+            createError: createError,
+            loadError: loadError
+        )
         environment = AppEnvironment(
             store: store,
             dayProvider: FixedDayProvider(
@@ -165,18 +202,27 @@ private final class OnboardingStore: TetherStore {
 
     private(set) var habits: [Habit]
     private let createError: StorageError?
+    var loadError: StorageError?
 
-    init(existingHabit: Habit?, createError: StorageError?) {
+    init(
+        existingHabit: Habit?,
+        createError: StorageError?,
+        loadError: StorageError?
+    ) {
         if let existingHabit {
             habits = [existingHabit]
         } else {
             habits = []
         }
         self.createError = createError
+        self.loadError = loadError
     }
 
     func loadHabit() throws -> Habit? {
-        habits.first
+        if let loadError {
+            throw loadError
+        }
+        return habits.first
     }
 
     func createHabit(from draft: HabitDraft, now: Date) throws -> Habit {
