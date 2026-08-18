@@ -16,6 +16,8 @@ struct TodayViewModelTests {
         #expect(viewModel.snapshot.current == 0)
         #expect(viewModel.snapshot.phase == .start)
         #expect(viewModel.statusHeadline == "Start your tether today")
+        #expect(viewModel.recentDays.count == 7)
+        #expect(viewModel.recentDays.last?.day == fixture.today)
     }
 
     @Test
@@ -110,6 +112,36 @@ struct TodayViewModelTests {
         #expect(viewModel.snapshot.current == 0)
         #expect(!viewModel.snapshot.isCheckedInToday)
         #expect(viewModel.errorMessage == "Couldn't save your check-in. Please try again.")
+    }
+
+    @Test
+    func loadingExposesSevenRecentDaysAndRefreshesTheSelectedDay() throws {
+        let fixture = try TodayFixture()
+        try fixture.seedCheckIn(dayOffset: -1, state: .rest)
+        let viewModel = fixture.makeViewModel()
+
+        viewModel.load()
+
+        #expect(viewModel.recentDays.count == 7)
+        #expect(viewModel.recentDays.last?.day == fixture.today)
+        #expect(viewModel.recentDays[5].state == .rest)
+        #expect(viewModel.recentDays.last?.state == nil)
+
+        viewModel.select(.light)
+
+        #expect(viewModel.recentDays.last?.state == .light)
+    }
+
+    @Test
+    func loadingWithoutAHabitClearsRecentDays() throws {
+        let fixture = try TodayFixture()
+        let viewModel = fixture.makeViewModel()
+        viewModel.load()
+
+        try fixture.store.resetAll()
+        viewModel.load()
+
+        #expect(viewModel.recentDays.isEmpty)
     }
 }
 

@@ -12,6 +12,7 @@ final class TodayViewModel {
         phase: .start,
         isCheckedInToday: false
     )
+    private(set) var recentDays: [RecentCheckInDay] = []
     private(set) var errorMessage: String?
     private(set) var completionMessage = AppCopy.todayCompletedMessage
 
@@ -134,6 +135,7 @@ final class TodayViewModel {
                 phase: .start,
                 isCheckedInToday: false
             )
+            recentDays = []
             completionMessage = AppCopy.todayCompletedMessage
             return
         }
@@ -141,6 +143,12 @@ final class TodayViewModel {
         let calendar = environment.dayProvider.calendar
         let today = LocalDay(date: environment.dayProvider.now, calendar: calendar)
         let checkIns = try environment.store.loadCheckIns(habitID: storedHabit.id)
+        recentDays = HistoryBuilder.recentDays(
+            habit: storedHabit,
+            checkIns: checkIns,
+            today: today,
+            calendar: calendar
+        )
         let todayCheckIn = checkIns
             .filter { $0.day == today }
             .max { $0.updatedAt < $1.updatedAt }
