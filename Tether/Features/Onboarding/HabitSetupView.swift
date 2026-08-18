@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct HabitSetupView: View {
     private enum Field: Hashable {
@@ -10,11 +11,16 @@ struct HabitSetupView: View {
     @State private var viewModel: OnboardingViewModel
     @FocusState private var focusedField: Field?
 
-    init(environment: AppEnvironment, onCreated: @escaping (Habit) -> Void) {
+    init(
+        environment: AppEnvironment,
+        onCreated: @escaping (Habit) -> Void,
+        onReminderError: @escaping (String?) -> Void = { _ in }
+    ) {
         _viewModel = State(
             initialValue: OnboardingViewModel(
                 environment: environment,
-                onCreated: onCreated
+                onCreated: onCreated,
+                onReminderError: onReminderError
             )
         )
     }
@@ -67,6 +73,43 @@ struct HabitSetupView: View {
                 Text(AppCopy.habitSetupTitle)
             }
 
+            Section(AppCopy.reminderSettingsSection) {
+                Toggle(
+                    AppCopy.dailyReminderLabel,
+                    isOn: Binding(
+                        get: { viewModel.isReminderEnabled },
+                        set: { isEnabled in
+                            Task {
+                                await viewModel.setReminderEnabled(isEnabled)
+                            }
+                        }
+                    )
+                )
+                .accessibilityIdentifier("reminder.toggle")
+
+                if viewModel.isReminderEnabled {
+                    VStack {
+                        DatePicker(
+                            "Reminder time",
+                            selection: $viewModel.reminderTime,
+                            displayedComponents: .hourAndMinute
+                        )
+                    }
+                    .accessibilityElement(children: .contain)
+                    .accessibilityIdentifier("reminder.time")
+                }
+
+                if let message = viewModel.reminderPermissionMessage {
+                    Text(message)
+                        .accessibilityIdentifier("reminder.permissionMessage")
+                }
+
+                if viewModel.showsOpenSettingsAction {
+                    Button(AppCopy.openIOSSettingsAction, action: openIOSSettings)
+                        .accessibilityIdentifier("reminder.openSettings")
+                }
+            }
+
             if let errorMessage = viewModel.errorMessage {
                 ErrorBanner(message: errorMessage)
                     .listRowInsets(EdgeInsets())
@@ -98,6 +141,15 @@ struct HabitSetupView: View {
     }
 
     private func submit() {
-        _ = viewModel.submit()
+        Task {
+            _ = await viewModel.submitWithReminderReconciliation()
+        }
+    }
+
+    private func openIOSSettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        UIApplication.shared.open(url)
     }
 }

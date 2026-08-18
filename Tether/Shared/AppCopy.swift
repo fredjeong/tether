@@ -30,6 +30,8 @@ enum AppCopy {
     static let firstCheckInHeadline = "Start your tether today"
     static let todayCompletedMessage = "You're still connected."
     static let changeAction = "Change"
+    static let checkInSaveError = "Couldn't save your check-in. Please try again."
+    static let todayLoadError = "Couldn't load today's check-in. Please try again."
 
     static let reconnectHeadline = "Reconnect today"
     static let reconnectSupportingCopy = "The connection ended, but your habit is still here."
@@ -43,6 +45,14 @@ enum AppCopy {
 
     static let settingsTitle = "Settings"
     static let habitSettingsSection = "Habit"
+    static let editHabitAction = "Edit habit"
+    static let aboutSettingsSection = "About"
+    static let dataSettingsSection = "Data"
+    static let saveAction = "Save"
+    static let doneAction = "Done"
+    static let settingsLoadError = "Couldn't load your habit. Please try again."
+    static let habitChangesSaveError = "Couldn't save your changes. Please try again."
+    static let resetError = "Couldn't reset your data. Please try again."
     static let reminderSettingsSection = "Reminder"
     static let notificationPermissionUnavailable = "Notifications are turned off in iOS Settings."
     static let openIOSSettingsAction = "Open iOS Settings"
@@ -51,6 +61,10 @@ enum AppCopy {
     static let resetBody = "This will permanently delete your habit and all check-ins from this iPhone."
     static let resetConfirmation = "Reset"
     static let cancelAction = "Cancel"
+
+    static func versionBuild(version: String, build: String) -> String {
+        "Version \(version) (\(build))"
+    }
 
     static func daysTethered(_ count: Int) -> String {
         count == 1 ? "1 day tethered" : "\(count) days tethered"

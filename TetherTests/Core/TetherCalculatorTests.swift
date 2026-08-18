@@ -151,6 +151,25 @@ struct TetherCalculatorTests {
         ))
     }
 
+    @Test func anOlderDuplicateAfterTheNewestRecordDoesNotChangeTetherCounts() {
+        let result = snapshot(
+            checkIns: [
+                makeCheckIn(on: day(1), state: .done),
+                makeCheckIn(on: day(2), state: .rest, updatedAt: timestamp(20)),
+                makeCheckIn(on: day(2), state: .done, updatedAt: timestamp(10)),
+                makeCheckIn(on: day(3), state: .light),
+            ],
+            today: day(3)
+        )
+
+        #expect(result == TetherSnapshot(
+            current: 3,
+            best: 3,
+            phase: .active,
+            isCheckedInToday: true
+        ))
+    }
+
     @Test func checkInsOutsideTheHabitAndTodayRangeAreDiscarded() {
         let result = snapshot(
             habitCreatedOn: day(2),

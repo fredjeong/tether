@@ -762,7 +762,7 @@ git commit -m "feat: add Tether onboarding"
 - Produces: TodayViewModel.load(), select(_:), and refresh().
 - Consumes: TetherStore, DayProviding, and TetherCalculator.
 
-- [ ] **Step 1: Write failing TodayViewModel tests**
+- [x] **Step 1: Write failing TodayViewModel tests**
 
 Test with an in-memory store and FixedDayProvider:
 
@@ -774,7 +774,7 @@ Test with an in-memory store and FixedDayProvider:
 - An older record separated by a Missed day yields Reconnect.
 - Store errors do not show a false success state.
 
-- [ ] **Step 2: Write failing Today UI tests**
+- [x] **Step 2: Write failing Today UI tests**
 
 Seed a Habit through launch arguments. Test:
 
@@ -792,11 +792,11 @@ Accessibility identifiers:
 - checkin.change
 - today.error
 
-- [ ] **Step 3: Confirm tests fail**
+- [x] **Step 3: Confirm tests fail**
 
 Run TodayViewModelTests and TodayUITests.
 
-- [ ] **Step 4: Implement TodayViewModel**
+- [x] **Step 4: Implement TodayViewModel**
 
 State:
 
@@ -819,7 +819,7 @@ final class TodayViewModel {
 
 load and select always recompute from persisted check-ins. Never increment a UI counter optimistically.
 
-- [ ] **Step 5: Implement TodayView**
+- [x] **Step 5: Implement TodayView**
 
 Layout order:
 
@@ -839,11 +839,11 @@ Each CheckInButton includes text plus a system symbol:
 
 Do not use a flame.
 
-- [ ] **Step 6: Verify 3-second path**
+- [x] **Step 6: Verify 3-second path**
 
 The normal path after launch must require exactly one tap to save a check-in. There must be no confirmation sheet, note field, or celebration that blocks interaction.
 
-- [ ] **Step 7: Run tests and commit**
+- [x] **Step 7: Run tests and commit**
 
 ~~~bash
 git add Tether/Features/Today Tether/Shared Tether/App/RootView.swift TetherTests/Features/TodayViewModelTests.swift TetherUITests/TodayUITests.swift
@@ -876,7 +876,7 @@ git commit -m "feat: add daily Tether check-in"
 - Produces: HistoryBuilder.build(habit:checkIns:today:calendar:limit:).
 - Consumes: TetherCalculator and TetherStore.
 
-- [ ] **Step 1: Write failing HistoryBuilder tests**
+- [x] **Step 1: Write failing HistoryBuilder tests**
 
 HistoryDay:
 
@@ -899,11 +899,11 @@ Test:
 - Duplicate days choose latest updatedAt consistently with TetherCalculator.
 - No future or pre-creation records are counted.
 
-- [ ] **Step 2: Confirm History tests fail**
+- [x] **Step 2: Confirm History tests fail**
 
 Run only HistoryBuilderTests.
 
-- [ ] **Step 3: Implement HistoryBuilder**
+- [x] **Step 3: Implement HistoryBuilder**
 
 Use one normalized dictionary of day to latest DailyCheckIn, then:
 
@@ -912,7 +912,7 @@ Use one normalized dictionary of day to latest DailyCheckIn, then:
 - Generate reverse day rows from today with Calendar arithmetic.
 - Cap at 30.
 
-- [ ] **Step 4: Implement HistoryViewModel and HistoryView**
+- [x] **Step 4: Implement HistoryViewModel and HistoryView**
 
 HistoryViewModel loads from TetherStore on appearance and when AppModel signals a change.
 
@@ -934,11 +934,11 @@ Accessibility identifiers:
 - history.restCount
 - history.list
 
-- [ ] **Step 5: Write and run a History UI test**
+- [x] **Step 5: Write and run a History UI test**
 
 Seed Done, Light, Rest, and one missing day. Assert each label is visible and Current/Best values match the seed.
 
-- [ ] **Step 6: Run all tests and commit**
+- [x] **Step 6: Run all tests and commit**
 
 ~~~bash
 git add Tether/Core/History Tether/Features/History TetherTests/Core/HistoryBuilderTests.swift TetherTests/Features/HistoryViewModelTests.swift TetherUITests/HistoryUITests.swift Tether/App/RootView.swift
@@ -970,7 +970,7 @@ git commit -m "feat: add Tether history"
 - Consumes: TetherStore and AppModel.didReset().
 - Task 9 extends SettingsViewModel with reminder properties without changing habit/reset APIs.
 
-- [ ] **Step 1: Write failing SettingsViewModel tests**
+- [x] **Step 1: Write failing SettingsViewModel tests**
 
 Test:
 
@@ -981,7 +981,7 @@ Test:
 - resetAll clears Habit and check-ins then calls AppModel.didReset.
 - reset failure remains in Settings and reports an error.
 
-- [ ] **Step 2: Implement Settings UI**
+- [x] **Step 2: Implement Settings UI**
 
 RootView Today toolbar opens Settings as a sheet. Settings contains:
 
@@ -991,7 +991,7 @@ RootView Today toolbar opens Settings as a sheet. Settings contains:
 
 HabitEditView uses the same limits and copy as onboarding. Save is disabled until valid and changed.
 
-- [ ] **Step 3: Implement reset confirmation**
+- [x] **Step 3: Implement reset confirmation**
 
 Use:
 
@@ -1002,7 +1002,7 @@ Use:
 
 After a successful reset, dismiss Settings and route to Welcome. Do not retain the previous Habit in any feature view model.
 
-- [ ] **Step 4: Add Settings UI tests**
+- [x] **Step 4: Add Settings UI tests**
 
 Test edit persistence and reset routing. Use identifiers:
 
@@ -1012,7 +1012,7 @@ Test edit persistence and reset routing. Use identifiers:
 - settings.resetConfirm
 - settings.version
 
-- [ ] **Step 5: Verify and commit**
+- [x] **Step 5: Verify and commit**
 
 ~~~bash
 git add Tether/Features/Settings Tether/App Tether/Shared/AppCopy.swift TetherTests/Features/SettingsViewModelTests.swift TetherUITests/SettingsUITests.swift
@@ -1047,7 +1047,7 @@ git commit -m "feat: add habit settings and reset"
 - ReminderPlan is a pure value with identifier and DateComponents.
 - UserNotificationReminderScheduler owns the prefix tether.daily.
 
-- [ ] **Step 1: Write failing ReminderPlanBuilder tests**
+- [x] **Step 1: Write failing ReminderPlanBuilder tests**
 
 The planner schedules 30 one-shot notifications so reminders continue even if the app is not reopened. Test:
 
@@ -1060,11 +1060,11 @@ The planner schedules 30 one-shot notifications so reminders continue even if th
 - Identifiers are tether.daily. plus LocalDay.storageKey.
 - Every plan uses title A moment for your habit and body Was today Done, Light, or Rest?
 
-- [ ] **Step 2: Write failing settings-store tests**
+- [x] **Step 2: Write failing settings-store tests**
 
 Use a unique UserDefaults suite. Verify default is off at 20:00, save/load round-trips, and reset returns to default.
 
-- [ ] **Step 3: Implement pure reminder types and settings store**
+- [x] **Step 3: Implement pure reminder types and settings store**
 
 UserDefaults keys:
 
@@ -1074,7 +1074,7 @@ UserDefaults keys:
 
 No other settings belong in UserDefaults. This storage is app-only and will be declared with privacy reason CA92.1 in Task 12.
 
-- [ ] **Step 4: Implement UserNotificationReminderScheduler**
+- [x] **Step 4: Implement UserNotificationReminderScheduler**
 
 Behavior:
 
@@ -1087,11 +1087,11 @@ Behavior:
 
 Use one-shot calendar triggers rather than a repeating trigger because today's completed reminder must be removable without disabling future days.
 
-- [ ] **Step 5: Add an in-memory FakeReminderScheduler**
+- [x] **Step 5: Add an in-memory FakeReminderScheduler**
 
 Tests and previews use a fake that records authorization requests, reconcile inputs, and cancellation. Do not call UNUserNotificationCenter from feature tests.
 
-- [ ] **Step 6: Verify and commit**
+- [x] **Step 6: Verify and commit**
 
 Run all service and regression tests. Then:
 
@@ -1126,7 +1126,7 @@ git commit -m "feat: add local reminder service"
 - Consumes: ReminderScheduling, ReminderSettingsStoring, TetherStore, DayProviding.
 - Does not expose UserNotifications types to views.
 
-- [ ] **Step 1: Write failing reminder integration tests**
+- [x] **Step 1: Write failing reminder integration tests**
 
 Test:
 
@@ -1140,7 +1140,7 @@ Test:
 - Reset clears reminder settings and cancels all.
 - Foreground refresh reloads Today and reconciles the rolling window.
 
-- [ ] **Step 2: Extend onboarding**
+- [x] **Step 2: Extend onboarding**
 
 Add optional Daily reminder toggle and time picker. Turning it on requests permission. Habit creation must still succeed if notification scheduling fails; show the scheduling error after entering the main app and keep reminder disabled.
 
@@ -1151,7 +1151,7 @@ Accessibility identifiers:
 - reminder.permissionMessage
 - reminder.openSettings
 
-- [ ] **Step 3: Extend Settings**
+- [x] **Step 3: Extend Settings**
 
 Add Reminder section:
 
@@ -1162,7 +1162,7 @@ Add Reminder section:
 
 Opening iOS Settings uses UIApplication.openSettingsURLString.
 
-- [ ] **Step 4: Integrate Today and lifecycle**
+- [x] **Step 4: Integrate Today and lifecycle**
 
 After a successful check-in:
 
@@ -1177,11 +1177,11 @@ On scenePhase active and NSCalendarDayChanged:
 - Refresh History on its next appearance.
 - Reconcile reminders.
 
-- [ ] **Step 5: Update UI tests**
+- [x] **Step 5: Update UI tests**
 
 UI tests must use FakeReminderScheduler through launch configuration; do not automate the system permission alert in the full suite. Add one narrowly scoped permission-alert test if the simulator supports resetting notification permissions deterministically.
 
-- [ ] **Step 6: Verify and commit**
+- [x] **Step 6: Verify and commit**
 
 ~~~bash
 git add Tether/Features Tether/App TetherTests/Features/ReminderIntegrationTests.swift TetherUITests
@@ -1212,7 +1212,7 @@ git commit -m "feat: connect reminders to daily flow"
 - No public interface changes.
 - Any production fix begins with a failing regression test.
 
-- [ ] **Step 1: Add failing lifecycle regression tests**
+- [x] **Step 1: Add failing lifecycle regression tests**
 
 Cover:
 
@@ -1224,11 +1224,11 @@ Cover:
 - Notification scheduling failure never rolls back a saved check-in.
 - Reset failure does not route away from Settings.
 
-- [ ] **Step 2: Add a deterministic lifecycle test harness**
+- [x] **Step 2: Add a deterministic lifecycle test harness**
 
 Use FixedDayProvider with a mutable now/calendar test implementation. Route scene activation and NSCalendarDayChanged through one AppModel.refreshForCurrentDay() method so tests do not need NotificationCenter.
 
-- [ ] **Step 3: Implement the smallest fixes**
+- [x] **Step 3: Implement the smallest fixes**
 
 On every refresh:
 
@@ -1251,7 +1251,7 @@ With debug launch arguments:
 
 Do not ship a hidden time-travel UI; the injection path is test/debug-only.
 
-- [ ] **Step 5: Verify and commit**
+- [x] **Step 5: Verify and commit**
 
 Run all unit and integration tests plus Today and History UI tests. Then:
 
