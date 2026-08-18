@@ -1,4 +1,5 @@
 import XCTest
+import UIKit
 
 @MainActor
 final class SettingsUITests: XCTestCase {
@@ -166,11 +167,113 @@ final class SettingsUITests: XCTestCase {
         XCTAssertFalse(app.alerts.element.exists)
     }
 
+    func testAppearanceControlPersistsDarkSelection() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-ui-testing-reset", "-ui-testing-seed-habit"]
+        app.launch()
+
+        openSettings(in: app)
+        let appearance = app.segmentedControls["settings.appearance"]
+        XCTAssertTrue(appearance.waitForExistence(timeout: 5))
+        XCTAssertTrue(appearance.buttons["Light"].isSelected)
+
+        appearance.buttons["Dark"].tap()
+        XCTAssertTrue(appearance.buttons["Dark"].isSelected)
+
+        app.terminate()
+        app.launchArguments = ["-ui-testing-runtime"]
+        app.launch()
+
+        openSettings(in: app)
+        XCTAssertTrue(
+            app.segmentedControls["settings.appearance"].buttons["Dark"].isSelected
+        )
+    }
+
+    func testAppearanceControlPersistsSystemSelection() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-ui-testing-reset", "-ui-testing-seed-habit"]
+        app.launch()
+
+        openSettings(in: app)
+        let appearance = app.segmentedControls["settings.appearance"]
+        XCTAssertTrue(appearance.waitForExistence(timeout: 5))
+        appearance.buttons["System"].tap()
+        XCTAssertTrue(appearance.buttons["System"].isSelected)
+
+        app.terminate()
+        app.launchArguments = ["-ui-testing-runtime"]
+        app.launch()
+
+        openSettings(in: app)
+        XCTAssertTrue(
+            app.segmentedControls["settings.appearance"].buttons["System"].isSelected
+        )
+    }
+
+    func testAppearanceSelectionUpdatesOpenSettingsColorScheme() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-ui-testing-reset", "-ui-testing-seed-habit"]
+        app.launch()
+
+        openSettings(in: app)
+        let appearance = app.segmentedControls["settings.appearance"]
+        XCTAssertTrue(appearance.waitForExistence(timeout: 5))
+
+        appearance.buttons["Dark"].tap()
+        XCTAssertTrue(appearance.buttons["Dark"].isSelected)
+        let darkLuminance = settingsLuminance(in: app)
+
+        appearance.buttons["Light"].tap()
+        XCTAssertTrue(appearance.buttons["Light"].isSelected)
+        let lightLuminance = settingsLuminance(in: app)
+
+        XCTAssertGreaterThan(lightLuminance, darkLuminance + 80)
+    }
+
     private func openSettings(in app: XCUIApplication) {
         let settings = app.buttons["settings.open"]
         XCTAssertTrue(settings.waitForExistence(timeout: 5))
         settings.tap()
         XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 5))
+    }
+
+    private func settingsLuminance(in app: XCUIApplication) -> CGFloat {
+        let screenshot = XCUIScreen.main.screenshot()
+        guard let image = UIImage(data: screenshot.pngRepresentation),
+              let cgImage = image.cgImage else {
+            XCTFail("Expected a settings screenshot.")
+            return 0
+        }
+
+        let point = CGPoint(
+            x: CGFloat(cgImage.width) * 0.05,
+            y: CGFloat(cgImage.height) * 0.30
+        )
+        var pixel = [UInt8](repeating: 0, count: 4)
+        guard let context = CGContext(
+            data: &pixel,
+            width: 1,
+            height: 1,
+            bitsPerComponent: 8,
+            bytesPerRow: 4,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else {
+            XCTFail("Expected a bitmap context.")
+            return 0
+        }
+
+        context.translateBy(x: -point.x, y: -point.y)
+        context.draw(cgImage, in: CGRect(
+            x: 0,
+            y: 0,
+            width: cgImage.width,
+            height: cgImage.height
+        ))
+        return 0.2126 * CGFloat(pixel[0])
+            + 0.7152 * CGFloat(pixel[1])
+            + 0.0722 * CGFloat(pixel[2])
     }
 
     private func assertResetAlert(in app: XCUIApplication) {

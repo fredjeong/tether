@@ -8,11 +8,13 @@ struct RootView: View {
     @State private var appModel: AppModel
     @State private var isPresentingSettings = false
     @State private var lifecycleRefreshTask: Task<Void, Never>?
+    @State private var themePreference: ThemePreference
 
     init(environment: AppEnvironment) {
         self.environment = environment
         if CommandLine.arguments.contains("-ui-testing-reset") {
             environment.reminderSettingsStore.reset()
+            environment.themePreferenceStore.reset()
         }
         if CommandLine.arguments.contains("-ui-testing-seed-reminder") {
             environment.reminderSettingsStore.save(
@@ -24,10 +26,14 @@ struct RootView: View {
             try appModel.load()
         } catch {}
         _appModel = State(initialValue: appModel)
+        _themePreference = State(
+            initialValue: environment.themePreferenceStore.load()
+        )
     }
 
     var body: some View {
-        switch appModel.rootContent {
+        ZStack {
+            switch appModel.rootContent {
         case .startupError:
             StartupErrorView(
                 message: appModel.startupErrorMessage ?? AppCopy.startupLoadError,
@@ -66,6 +72,13 @@ struct RootView: View {
                             NavigationStack {
                                 SettingsView(
                                     environment: environment,
+                                    selectedTheme: Binding(
+                                        get: { themePreference },
+                                        set: { preference in
+                                            themePreference = preference
+                                            environment.themePreferenceStore.save(preference)
+                                        }
+                                    ),
                                     onHabitSaved: appModel.didUpdateHabit,
                                     onReset: {
                                         appModel.didReset()
@@ -118,7 +131,11 @@ struct RootView: View {
                 lifecycleRefreshTask?.cancel()
                 lifecycleRefreshTask = nil
             }
+            }
         }
+        .background(TetherTheme.canvas)
+        .preferredColorScheme(themePreference.colorScheme)
+        .tint(TetherTheme.accent)
     }
 
     private func load(_ appModel: AppModel) {

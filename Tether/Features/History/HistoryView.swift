@@ -71,6 +71,8 @@ struct HistoryView: View {
             }
         }
         .accessibilityIdentifier("history.list")
+        .scrollContentBackground(.hidden)
+        .background(TetherTheme.canvas)
         .navigationTitle(AppCopy.historyTitle)
         .onAppear {
             viewModel.load()
@@ -85,13 +87,18 @@ struct HistoryView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(label)
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(TetherTheme.textSecondary)
             Text(value, format: .number)
                 .font(.title.bold())
+                .foregroundStyle(TetherTheme.textPrimary)
         }
         .frame(maxWidth: .infinity, minHeight: 88, alignment: .leading)
         .padding()
-        .background(.quaternary, in: RoundedRectangle(cornerRadius: 16))
+        .background(TetherTheme.surface, in: RoundedRectangle(cornerRadius: 16))
+        .overlay {
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(TetherTheme.separator, lineWidth: 1)
+        }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(label), \(value)")
         .accessibilityIdentifier(identifier)
@@ -104,14 +111,21 @@ struct HistoryView: View {
     ) -> some View {
         VStack(spacing: 6) {
             Image(systemName: state.systemImage)
+                .foregroundStyle(state.tetherColor)
             Text(state.title)
                 .font(.caption)
+                .foregroundStyle(TetherTheme.textPrimary)
             Text(count, format: .number)
                 .font(.headline)
+                .foregroundStyle(TetherTheme.textPrimary)
         }
         .frame(maxWidth: .infinity, minHeight: 76)
         .padding(.vertical, 8)
-        .background(.quaternary, in: RoundedRectangle(cornerRadius: 14))
+        .background(TetherTheme.surface, in: RoundedRectangle(cornerRadius: 14))
+        .overlay {
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(TetherTheme.separator, lineWidth: 1)
+        }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(state.title), \(count)")
         .accessibilityIdentifier(identifier)

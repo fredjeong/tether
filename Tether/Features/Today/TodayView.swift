@@ -16,20 +16,22 @@ struct TodayView: View {
             VStack(alignment: .leading, spacing: 24) {
                 Text(formattedDate)
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(TetherTheme.textSecondary)
 
                 if let habit = viewModel.habit {
                     Text(habit.name)
                         .font(.title3.weight(.semibold))
+                        .foregroundStyle(TetherTheme.textPrimary)
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text(viewModel.statusHeadline)
                             .font(.largeTitle.bold())
+                            .foregroundStyle(TetherTheme.textPrimary)
                             .accessibilityIdentifier("today.tetherStatus")
 
                         Text(viewModel.supportingCopy)
                             .font(.body)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(TetherTheme.textSecondary)
                     }
 
                     if let errorMessage = viewModel.errorMessage {
@@ -39,6 +41,7 @@ struct TodayView: View {
 
                     Text(AppCopy.todayPrompt)
                         .font(.title2.bold())
+                        .foregroundStyle(TetherTheme.textPrimary)
 
                     if viewModel.selectedState == nil || isChangingSelection {
                         VStack(spacing: 12) {
@@ -57,6 +60,7 @@ struct TodayView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
         }
+        .background(TetherTheme.canvas)
         .navigationTitle("Today")
         .onAppear {
             viewModel.load()
@@ -76,13 +80,29 @@ struct TodayView: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
                 Image(systemName: state.systemImage)
+                    .foregroundStyle(state.tetherColor)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(state.title)
-                        .font(.headline)
+                    HStack(spacing: 6) {
+                        Text(state.title)
+                            .font(.headline)
+                        Text(AppCopy.selectionStatus)
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(TetherTheme.accent)
+                    }
                     Text(state.helper)
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(TetherTheme.textSecondary)
                 }
+                Spacer()
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.title3)
+                    .foregroundStyle(state.tetherColor)
+            }
+            .padding(16)
+            .background(TetherTheme.surface, in: RoundedRectangle(cornerRadius: 20))
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(state.tetherColor, lineWidth: 1)
             }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("\(state.title), selected, \(state.helper)")
@@ -91,6 +111,8 @@ struct TodayView: View {
             Button(AppCopy.changeAction) {
                 isChangingSelection = true
             }
+            .buttonStyle(.bordered)
+            .tint(TetherTheme.accent)
             .accessibilityIdentifier("checkin.change")
         }
     }

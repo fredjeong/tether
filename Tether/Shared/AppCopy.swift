@@ -30,6 +30,7 @@ enum AppCopy {
     static let firstCheckInHeadline = "Start your tether today"
     static let todayCompletedMessage = "You're still connected."
     static let changeAction = "Change"
+    static let selectionStatus = "Selected"
     static let checkInSaveError = "Couldn't save your check-in. Please try again."
     static let todayLoadError = "Couldn't load today's check-in. Please try again."
 
@@ -44,6 +45,10 @@ enum AppCopy {
     static let historyEmptyState = "Your check-ins will appear here."
 
     static let settingsTitle = "Settings"
+    static let appearanceSettingsSection = "Appearance"
+    static let systemAppearanceLabel = "System"
+    static let lightAppearanceLabel = "Light"
+    static let darkAppearanceLabel = "Dark"
     static let habitSettingsSection = "Habit"
     static let editHabitAction = "Edit habit"
     static let aboutSettingsSection = "About"

@@ -10,21 +10,31 @@ struct CheckInButton: View {
                 Image(systemName: state.systemImage)
                     .font(.title2)
                     .frame(width: 32)
+                    .foregroundStyle(state.tetherColor)
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(state.title)
                         .font(.headline)
                     Text(state.helper)
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(TetherTheme.textSecondary)
                 }
 
                 Spacer()
+
+                Image(systemName: "circle")
+                    .font(.title3)
+                    .foregroundStyle(TetherTheme.missed)
             }
-            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
-            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
+            .padding(16)
+            .background(TetherTheme.surface, in: RoundedRectangle(cornerRadius: 20))
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(TetherTheme.separator, lineWidth: 1)
+            }
         }
-        .buttonStyle(.bordered)
+        .buttonStyle(.plain)
         .accessibilityLabel("\(state.title), \(state.helper)")
         .accessibilityIdentifier(state.buttonIdentifier)
     }
@@ -60,6 +70,14 @@ extension CheckInState {
         case .done: "checkin.done"
         case .light: "checkin.light"
         case .rest: "checkin.rest"
+        }
+    }
+
+    var tetherColor: Color {
+        switch self {
+        case .done: TetherTheme.done
+        case .light: TetherTheme.light
+        case .rest: TetherTheme.rest
         }
     }
 }

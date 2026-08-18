@@ -123,6 +123,8 @@ struct HabitSetupView: View {
                     .accessibilityIdentifier("habit.submit")
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(TetherTheme.canvas)
         .navigationTitle(AppCopy.habitSetupTitle)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {

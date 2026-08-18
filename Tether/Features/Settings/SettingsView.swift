@@ -5,12 +5,15 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel: SettingsViewModel
     @State private var isConfirmingReset = false
+    let selectedTheme: Binding<ThemePreference>
 
     init(
         environment: AppEnvironment,
+        selectedTheme: Binding<ThemePreference>,
         onHabitSaved: @escaping (Habit) -> Void,
         onReset: @escaping () -> Void
     ) {
+        self.selectedTheme = selectedTheme
         _viewModel = State(initialValue: SettingsViewModel(
             environment: environment,
             onHabitSaved: onHabitSaved,
@@ -22,6 +25,16 @@ struct SettingsView: View {
         @Bindable var viewModel = viewModel
 
         List {
+            Section(AppCopy.appearanceSettingsSection) {
+                Picker(AppCopy.appearanceSettingsSection, selection: selectedTheme) {
+                    ForEach(ThemePreference.allCases, id: \.self) { preference in
+                        Text(preference.title).tag(preference)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .accessibilityIdentifier("settings.appearance")
+            }
+
             Section(AppCopy.habitSettingsSection) {
                 NavigationLink {
                     HabitEditView(viewModel: viewModel)
@@ -97,6 +110,9 @@ struct SettingsView: View {
                 .accessibilityIdentifier("settings.reset")
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(TetherTheme.canvas)
+        .preferredColorScheme(selectedTheme.wrappedValue.colorScheme)
         .navigationTitle(AppCopy.settingsTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

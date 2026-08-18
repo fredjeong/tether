@@ -9,13 +9,17 @@ struct HistoryDayRow: View {
         HStack(spacing: 12) {
             Image(systemName: systemImage)
                 .frame(width: 24)
+                .foregroundStyle(day.state?.tetherColor ?? TetherTheme.missed)
 
             Text(formattedDate)
+                .foregroundStyle(TetherTheme.textPrimary)
 
             Spacer()
 
             Text(stateLabel)
-                .foregroundStyle(day.state == nil ? .secondary : .primary)
+                .foregroundStyle(
+                    day.state?.tetherColor ?? TetherTheme.textSecondary
+                )
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(formattedDate), \(stateLabel)")

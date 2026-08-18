@@ -6,10 +6,14 @@ struct ErrorBanner: View {
     var body: some View {
         Label(message, systemImage: "exclamationmark.circle")
             .font(.subheadline)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(TetherTheme.textSecondary)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
-            .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
+            .background(TetherTheme.surface, in: RoundedRectangle(cornerRadius: 12))
+            .overlay {
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(TetherTheme.separator, lineWidth: 1)
+            }
             .accessibilityElement(children: .combine)
     }
 }
