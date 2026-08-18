@@ -43,6 +43,8 @@
 		100000000000000000000022 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000025 /* TodayViewModel.swift */; };
 		100000000000000000000023 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000026 /* TodayView.swift */; };
 		100000000000000000000024 /* CheckInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000027 /* CheckInButton.swift */; };
+		100000000000000000000042 /* TodayTetherSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000042 /* TodayTetherSummary.swift */; };
+		100000000000000000000043 /* CheckInStateGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000043 /* CheckInStateGrid.swift */; };
 		100000000000000000000025 /* HistoryBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000028 /* HistoryBuilderTests.swift */; };
 		100000000000000000000026 /* HistoryDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110000000000000000000029 /* HistoryDay.swift */; };
 		100000000000000000000027 /* HistorySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11000000000000000000002A /* HistorySummary.swift */; };
@@ -128,6 +130,8 @@
 		110000000000000000000025 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		110000000000000000000026 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		110000000000000000000027 /* CheckInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInButton.swift; sourceTree = "<group>"; };
+		110000000000000000000042 /* TodayTetherSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTetherSummary.swift; sourceTree = "<group>"; };
+		110000000000000000000043 /* CheckInStateGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInStateGrid.swift; sourceTree = "<group>"; };
 		110000000000000000000028 /* HistoryBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryBuilderTests.swift; sourceTree = "<group>"; };
 		110000000000000000000029 /* HistoryDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDay.swift; sourceTree = "<group>"; };
 		11000000000000000000002A /* HistorySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySummary.swift; sourceTree = "<group>"; };
@@ -415,6 +419,8 @@
 			children = (
 				110000000000000000000025 /* TodayViewModel.swift */,
 				110000000000000000000026 /* TodayView.swift */,
+				110000000000000000000042 /* TodayTetherSummary.swift */,
+				110000000000000000000043 /* CheckInStateGrid.swift */,
 				110000000000000000000027 /* CheckInButton.swift */,
 			);
 			path = Today;
@@ -614,6 +620,8 @@
 				10000000000000000000001F /* ErrorBanner.swift in Sources */,
 				100000000000000000000022 /* TodayViewModel.swift in Sources */,
 				100000000000000000000023 /* TodayView.swift in Sources */,
+				100000000000000000000042 /* TodayTetherSummary.swift in Sources */,
+				100000000000000000000043 /* CheckInStateGrid.swift in Sources */,
 				100000000000000000000024 /* CheckInButton.swift in Sources */,
 				100000000000000000000026 /* HistoryDay.swift in Sources */,
 				100000000000000000000027 /* HistorySummary.swift in Sources */,

@@ -17,6 +17,20 @@ final class TodayUITests: XCTestCase {
         XCTAssertEqual(done.label, "Done, I did what I planned.")
         XCTAssertEqual(light.label, "Light, I did a smaller version.")
         XCTAssertEqual(rest.label, "Rest, I chose to rest today.")
+        XCTAssertEqual(
+            app.staticTexts["today.tetherStatus"].label,
+            "Current Tether, 0. Best Tether, 0"
+        )
+
+        let week = app.otherElements["today.week"]
+        XCTAssertTrue(week.waitForExistence(timeout: 5))
+        XCTAssertTrue(week.label.contains("Recent check-ins"))
+
+        let grid = app.otherElements["today.checkInGrid"]
+        XCTAssertTrue(grid.exists)
+        XCTAssertTrue(done.exists)
+        XCTAssertTrue(light.exists)
+        XCTAssertTrue(rest.exists)
 
         done.tap()
 

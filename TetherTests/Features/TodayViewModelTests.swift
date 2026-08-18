@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import Testing
 @testable import Tether
 
@@ -142,6 +143,12 @@ struct TodayViewModelTests {
         viewModel.load()
 
         #expect(viewModel.recentDays.isEmpty)
+    }
+
+    @Test
+    func checkInGridStacksOnlyAtAccessibilityTextSizes() {
+        #expect(!CheckInGridLayout.usesVerticalLayout(for: .large))
+        #expect(CheckInGridLayout.usesVerticalLayout(for: .accessibility1))
     }
 }
 

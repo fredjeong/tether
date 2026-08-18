@@ -11,6 +11,11 @@ struct CheckInButton: View {
                     .font(.title2)
                     .frame(width: 32)
                     .foregroundStyle(state.tetherColor)
+                    .padding(8)
+                    .background {
+                        Circle()
+                            .fill(state == .rest ? TetherTheme.accent.opacity(0.14) : TetherTheme.canvas)
+                    }
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(state.title)
@@ -60,7 +65,7 @@ extension CheckInState {
     var systemImage: String {
         switch self {
         case .done: "checkmark.circle"
-        case .light: "leaf"
+        case .light: "sparkles"
         case .rest: "moon"
         }
     }
@@ -75,9 +80,8 @@ extension CheckInState {
 
     var tetherColor: Color {
         switch self {
-        case .done: TetherTheme.done
-        case .light: TetherTheme.light
-        case .rest: TetherTheme.rest
+        case .done: TetherTheme.textPrimary
+        case .light, .rest: TetherTheme.accent
         }
     }
 }

@@ -42,6 +42,8 @@ enum AppCopy {
     static let currentTetherLabel = "Current Tether"
     static let bestTetherLabel = "Best Tether"
     static let missedStateLabel = "No check-in"
+    static let recentCheckInsAccessibilityLabel = "Recent check-ins"
+    static let beforeHabitBeganAccessibilityLabel = "Before this habit began"
     static let historyEmptyState = "Your check-ins will appear here."
 
     static let settingsTitle = "Settings"

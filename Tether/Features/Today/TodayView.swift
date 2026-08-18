@@ -1,4 +1,3 @@
-import Foundation
 import SwiftUI
 
 struct TodayView: View {
@@ -14,25 +13,14 @@ struct TodayView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                Text(formattedDate)
-                    .font(.subheadline)
-                    .foregroundStyle(TetherTheme.textSecondary)
-
                 if let habit = viewModel.habit {
-                    Text(habit.name)
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(TetherTheme.textPrimary)
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(viewModel.statusHeadline)
-                            .font(.largeTitle.bold())
-                            .foregroundStyle(TetherTheme.textPrimary)
-                            .accessibilityIdentifier("today.tetherStatus")
-
-                        Text(viewModel.supportingCopy)
-                            .font(.body)
-                            .foregroundStyle(TetherTheme.textSecondary)
-                    }
+                    TodayTetherSummary(
+                        habit: habit,
+                        snapshot: viewModel.snapshot,
+                        days: viewModel.recentDays,
+                        calendar: environment.dayProvider.calendar,
+                        supportingCopy: viewModel.supportingCopy
+                    )
 
                     if let errorMessage = viewModel.errorMessage {
                         ErrorBanner(message: errorMessage)
@@ -44,10 +32,11 @@ struct TodayView: View {
                         .foregroundStyle(TetherTheme.textPrimary)
 
                     if viewModel.selectedState == nil || isChangingSelection {
-                        VStack(spacing: 12) {
-                            checkInButton(for: .done)
-                            checkInButton(for: .light)
-                            checkInButton(for: .rest)
+                        CheckInStateGrid { state in
+                            viewModel.select(state)
+                            if viewModel.errorMessage == nil {
+                                isChangingSelection = false
+                            }
                         }
                     } else if let selectedState = viewModel.selectedState {
                         savedState(selectedState)
@@ -64,15 +53,6 @@ struct TodayView: View {
         .navigationTitle("Today")
         .onAppear {
             viewModel.load()
-        }
-    }
-
-    private func checkInButton(for state: CheckInState) -> some View {
-        CheckInButton(state: state) {
-            viewModel.select(state)
-            if viewModel.errorMessage == nil {
-                isChangingSelection = false
-            }
         }
     }
 
@@ -115,15 +95,5 @@ struct TodayView: View {
             .tint(TetherTheme.accent)
             .accessibilityIdentifier("checkin.change")
         }
-    }
-
-    private var formattedDate: String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.calendar = environment.dayProvider.calendar
-        formatter.timeZone = environment.dayProvider.calendar.timeZone
-        formatter.dateStyle = .full
-        formatter.timeStyle = .none
-        return formatter.string(from: environment.dayProvider.now)
     }
 }
