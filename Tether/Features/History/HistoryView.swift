@@ -14,17 +14,28 @@ struct HistoryView: View {
         List {
             Section {
                 HStack(spacing: 12) {
-                    metricCard(
+                    tetherMetric(
                         label: AppCopy.currentTetherLabel,
                         value: viewModel.summary.current,
                         identifier: "history.current"
                     )
-                    metricCard(
+                    tetherMetric(
                         label: AppCopy.bestTetherLabel,
                         value: viewModel.summary.best,
                         identifier: "history.best"
                     )
                 }
+                .padding(16)
+                .background(TetherTheme.surface, in: RoundedRectangle(cornerRadius: 16))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(TetherTheme.separator, lineWidth: 1)
+                }
+                .accessibilityElement(children: .contain)
+                .accessibilityLabel(
+                    "\(AppCopy.currentTetherLabel), \(viewModel.summary.current). \(AppCopy.bestTetherLabel), \(viewModel.summary.best)"
+                )
+                .accessibilityIdentifier("history.tetherSummary")
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
             }
@@ -79,7 +90,7 @@ struct HistoryView: View {
         }
     }
 
-    private func metricCard(
+    private func tetherMetric(
         label: String,
         value: Int,
         identifier: String
@@ -92,13 +103,7 @@ struct HistoryView: View {
                 .font(.title.bold())
                 .foregroundStyle(TetherTheme.textPrimary)
         }
-        .frame(maxWidth: .infinity, minHeight: 88, alignment: .leading)
-        .padding()
-        .background(TetherTheme.surface, in: RoundedRectangle(cornerRadius: 16))
-        .overlay {
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(TetherTheme.separator, lineWidth: 1)
-        }
+        .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(label), \(value)")
         .accessibilityIdentifier(identifier)

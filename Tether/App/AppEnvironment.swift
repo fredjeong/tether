@@ -59,16 +59,16 @@ final class UserDefaultsThemePreferenceStore: ThemePreferenceStoring {
 }
 
 enum TetherTheme {
-    static let canvas = adaptive(light: 0xF8F4EC, dark: 0x0D111B)
-    static let surface = adaptive(light: 0xFFFFFF, dark: 0x1A202B)
-    static let textPrimary = adaptive(light: 0x172235, dark: 0xF7F5F0)
-    static let textSecondary = adaptive(light: 0x5E6878, dark: 0xB7BAC5)
-    static let separator = adaptive(light: 0xE4DED5, dark: 0x303744)
-    static let accent = adaptive(light: 0x5C5BB4, dark: 0x8D8CFF)
-    static let done = adaptive(light: 0x2C7754, dark: 0x54D28A)
-    static let light = adaptive(light: 0xA86D20, dark: 0xF0BA52)
-    static let rest = adaptive(light: 0x5A5BB7, dark: 0x9391FF)
-    static let missed = adaptive(light: 0x717988, dark: 0x949AA7)
+    static let canvas = adaptive(light: 0xF5F1EA, dark: 0x171717)
+    static let surface = adaptive(light: 0xFFFDF9, dark: 0x222222)
+    static let textPrimary = adaptive(light: 0x20201E, dark: 0xF3F0EA)
+    static let textSecondary = adaptive(light: 0x746F68, dark: 0xBFB9B0)
+    static let separator = adaptive(light: 0xD8D1C7, dark: 0x3D3934)
+    static let accent = adaptive(light: 0xA6503C, dark: 0xE18C76)
+    static let done = textPrimary
+    static let light = accent
+    static let rest = accent
+    static let missed = textSecondary
 
     private static func adaptive(light: Int, dark: Int) -> Color {
         Color(uiColor: UIColor { traits in

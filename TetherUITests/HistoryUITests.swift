@@ -16,6 +16,11 @@ final class HistoryUITests: XCTestCase {
         assertLabel("Current Tether, 3", for: current)
         assertLabel("Best Tether, 3", for: best)
 
+        let summary = app.otherElements["history.tetherSummary"]
+        XCTAssertTrue(summary.waitForExistence(timeout: 5))
+        XCTAssertEqual(summary.label, "Current Tether, 3. Best Tether, 3")
+        XCTAssertTrue(app.descendants(matching: .any)["history.day.1-2026-08-17"].exists)
+
         assertLabel(
             "Done, 1",
             for: app.descendants(matching: .any)["history.doneCount"]
@@ -48,6 +53,22 @@ final class HistoryUITests: XCTestCase {
             "Aug 14, 2026, No check-in",
             for: app.descendants(matching: .any)["history.day.1-2026-08-14"]
         )
+    }
+
+    func testSeededHistoryRetainsItsStructureAfterSwitchingToDarkAppearance() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-ui-testing-reset", "-ui-testing-seed-history"]
+        app.launch()
+
+        app.buttons["settings.open"].tap()
+        let appearance = app.segmentedControls["settings.appearance"]
+        XCTAssertTrue(appearance.waitForExistence(timeout: 5))
+        appearance.buttons["Dark"].tap()
+        app.buttons["settings.done"].tap()
+        app.tabBars.buttons["tab.history"].tap()
+
+        XCTAssertTrue(app.otherElements["history.tetherSummary"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.descendants(matching: .any)["history.day.1-2026-08-17"].exists)
     }
 
     private func assertLabel(

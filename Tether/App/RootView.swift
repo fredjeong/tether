@@ -140,6 +140,8 @@ struct RootView: View {
             )
         )
         .tint(TetherTheme.accent)
+        .toolbarBackground(TetherTheme.canvas, for: .tabBar)
+        .toolbarBackground(.visible, for: .tabBar)
     }
 
     private func load(_ appModel: AppModel) {

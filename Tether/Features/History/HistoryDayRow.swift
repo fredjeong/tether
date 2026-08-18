@@ -10,6 +10,11 @@ struct HistoryDayRow: View {
             Image(systemName: systemImage)
                 .frame(width: 24)
                 .foregroundStyle(day.state?.tetherColor ?? TetherTheme.missed)
+                .padding(6)
+                .background {
+                    Circle()
+                        .fill(day.state == .rest ? TetherTheme.accent.opacity(0.14) : TetherTheme.canvas)
+                }
 
             Text(formattedDate)
                 .foregroundStyle(TetherTheme.textPrimary)
