@@ -66,6 +66,11 @@ private struct StateDescription: View {
                 .font(.title3)
                 .foregroundStyle(state.tetherColor)
                 .frame(width: 28)
+                .padding(8)
+                .background {
+                    Circle()
+                        .fill(state == .rest ? TetherTheme.accent.opacity(0.14) : TetherTheme.canvas)
+                }
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.headline)

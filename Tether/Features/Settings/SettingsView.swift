@@ -112,6 +112,7 @@ struct SettingsView: View {
         }
         .scrollContentBackground(.hidden)
         .background(TetherTheme.canvas)
+        .tint(TetherTheme.accent)
         .navigationTitle(AppCopy.settingsTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

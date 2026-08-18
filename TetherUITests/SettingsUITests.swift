@@ -179,6 +179,10 @@ final class SettingsUITests: XCTestCase {
 
         appearance.buttons["Dark"].tap()
         XCTAssertTrue(appearance.buttons["Dark"].isSelected)
+        XCTAssertTrue(app.segmentedControls["settings.appearance"].exists)
+        XCTAssertTrue(app.buttons["settings.editHabit"].exists)
+        XCTAssertTrue(app.switches["reminder.toggle"].exists)
+        XCTAssertTrue(app.buttons["settings.reset"].exists)
 
         app.terminate()
         app.launchArguments = ["-ui-testing-runtime"]

@@ -15,6 +15,10 @@ final class OnboardingUITests: XCTestCase {
 
         app.buttons["onboarding.start"].tap()
 
+        XCTAssertTrue(app.staticTexts["Workout"].exists)
+        XCTAssertTrue(app.staticTexts["A full workout"].exists)
+        XCTAssertTrue(app.staticTexts["Move for 10 minutes"].exists)
+
         let name = app.textFields["habit.name"]
         name.tap()
         name.typeText("Workout")

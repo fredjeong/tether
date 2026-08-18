@@ -30,45 +30,63 @@ struct HabitSetupView: View {
 
         Form {
             Section {
-                TextField(
-                    AppCopy.habitNameLabel,
-                    text: limitedBinding(for: $viewModel.name, limit: 40)
-                )
-                .textContentType(nil)
-                .textInputAutocapitalization(.sentences)
-                .autocorrectionDisabled(false)
-                .submitLabel(.next)
-                .focused($focusedField, equals: .name)
-                .accessibilityIdentifier("habit.name")
-                .onSubmit {
-                    focusedField = .doneMeaning
+                VStack(alignment: .leading, spacing: 4) {
+                    TextField(
+                        AppCopy.habitNameLabel,
+                        text: limitedBinding(for: $viewModel.name, limit: 40)
+                    )
+                    .textContentType(nil)
+                    .textInputAutocapitalization(.sentences)
+                    .autocorrectionDisabled(false)
+                    .submitLabel(.next)
+                    .focused($focusedField, equals: .name)
+                    .accessibilityIdentifier("habit.name")
+                    .onSubmit {
+                        focusedField = .doneMeaning
+                    }
+
+                    Text(AppCopy.habitNameExample)
+                        .font(.footnote)
+                        .foregroundStyle(TetherTheme.textSecondary)
                 }
 
-                TextField(
-                    AppCopy.doneMeaningLabel,
-                    text: limitedBinding(for: $viewModel.doneMeaning, limit: 80)
-                )
-                .textContentType(nil)
-                .textInputAutocapitalization(.sentences)
-                .autocorrectionDisabled(false)
-                .submitLabel(.next)
-                .focused($focusedField, equals: .doneMeaning)
-                .accessibilityIdentifier("habit.doneMeaning")
-                .onSubmit {
-                    focusedField = .lightMeaning
+                VStack(alignment: .leading, spacing: 4) {
+                    TextField(
+                        AppCopy.doneMeaningLabel,
+                        text: limitedBinding(for: $viewModel.doneMeaning, limit: 80)
+                    )
+                    .textContentType(nil)
+                    .textInputAutocapitalization(.sentences)
+                    .autocorrectionDisabled(false)
+                    .submitLabel(.next)
+                    .focused($focusedField, equals: .doneMeaning)
+                    .accessibilityIdentifier("habit.doneMeaning")
+                    .onSubmit {
+                        focusedField = .lightMeaning
+                    }
+
+                    Text(AppCopy.doneMeaningExample)
+                        .font(.footnote)
+                        .foregroundStyle(TetherTheme.textSecondary)
                 }
 
-                TextField(
-                    AppCopy.lightMeaningLabel,
-                    text: limitedBinding(for: $viewModel.lightMeaning, limit: 80)
-                )
-                .textContentType(nil)
-                .textInputAutocapitalization(.sentences)
-                .autocorrectionDisabled(false)
-                .submitLabel(.done)
-                .focused($focusedField, equals: .lightMeaning)
-                .accessibilityIdentifier("habit.lightMeaning")
-                .onSubmit(submit)
+                VStack(alignment: .leading, spacing: 4) {
+                    TextField(
+                        AppCopy.lightMeaningLabel,
+                        text: limitedBinding(for: $viewModel.lightMeaning, limit: 80)
+                    )
+                    .textContentType(nil)
+                    .textInputAutocapitalization(.sentences)
+                    .autocorrectionDisabled(false)
+                    .submitLabel(.done)
+                    .focused($focusedField, equals: .lightMeaning)
+                    .accessibilityIdentifier("habit.lightMeaning")
+                    .onSubmit(submit)
+
+                    Text(AppCopy.lightMeaningExample)
+                        .font(.footnote)
+                        .foregroundStyle(TetherTheme.textSecondary)
+                }
             } header: {
                 Text(AppCopy.habitSetupTitle)
             }
@@ -125,6 +143,7 @@ struct HabitSetupView: View {
         }
         .scrollContentBackground(.hidden)
         .background(TetherTheme.canvas)
+        .tint(TetherTheme.accent)
         .navigationTitle(AppCopy.habitSetupTitle)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
