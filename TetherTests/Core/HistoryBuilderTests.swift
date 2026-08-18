@@ -187,6 +187,116 @@ struct HistoryBuilderTests {
         #expect(result.current == 2)
         #expect(result.best == 3)
     }
+
+    @Test
+    func recentDaysReturnsExactlySevenOldestToNewestDays() throws {
+        let fixture = HistoryFixture()
+        let today = fixture.day(year: 2026, month: 8, day: 17)
+        let habit = fixture.makeHabit(
+            createdOn: fixture.day(year: 2026, month: 8, day: 14)
+        )
+        let checkIns = [
+            fixture.makeCheckIn(
+                habitID: habit.id,
+                on: fixture.day(year: 2026, month: 8, day: 15),
+                state: .rest
+            ),
+            fixture.makeCheckIn(
+                habitID: habit.id,
+                on: fixture.day(year: 2026, month: 8, day: 16),
+                state: .light
+            ),
+        ]
+
+        let days = HistoryBuilder.recentDays(
+            habit: habit,
+            checkIns: checkIns,
+            today: today,
+            calendar: fixture.calendar
+        )
+
+        #expect(days.count == 7)
+        #expect(days.map(\.day) == (-6...0).map {
+            today.adding(days: $0, calendar: fixture.calendar)
+        })
+        #expect(days.suffix(3).map(\.state) == [.rest, .light, nil])
+    }
+
+    @Test
+    func recentDaysMarksDatesBeforeHabitCreationWithoutCallingThemMissed() throws {
+        let fixture = HistoryFixture()
+        let today = fixture.day(year: 2026, month: 8, day: 17)
+        let habit = fixture.makeHabit(
+            createdOn: fixture.day(year: 2026, month: 8, day: 15)
+        )
+
+        let days = HistoryBuilder.recentDays(
+            habit: habit,
+            checkIns: [],
+            today: today,
+            calendar: fixture.calendar
+        )
+
+        #expect(days.prefix(4).allSatisfy { $0.isBeforeHabitStarted })
+        #expect(days.suffix(3).allSatisfy { !$0.isBeforeHabitStarted })
+        #expect(days.allSatisfy { $0.state == nil })
+    }
+
+    @Test
+    func recentDaysUsesTheMostRecentlyUpdatedRecordForADay() throws {
+        let fixture = HistoryFixture()
+        let today = fixture.day(year: 2026, month: 8, day: 17)
+        let habit = fixture.makeHabit(
+            createdOn: fixture.day(year: 2026, month: 8, day: 7)
+        )
+        let targetDay = fixture.day(year: 2026, month: 8, day: 16)
+        let earlier = fixture.makeCheckIn(
+            habitID: habit.id,
+            on: targetDay,
+            state: .done,
+            updatedAt: Date(timeIntervalSince1970: 10)
+        )
+        let later = fixture.makeCheckIn(
+            habitID: habit.id,
+            on: targetDay,
+            state: .rest,
+            updatedAt: Date(timeIntervalSince1970: 20)
+        )
+
+        let days = HistoryBuilder.recentDays(
+            habit: habit,
+            checkIns: [earlier, later],
+            today: today,
+            calendar: fixture.calendar
+        )
+
+        #expect(days[5].state == .rest)
+    }
+
+    @Test
+    func recentDaysReturnsNoDaysForANonPositiveCount() throws {
+        let fixture = HistoryFixture()
+        let today = fixture.day(year: 2026, month: 8, day: 17)
+        let habit = fixture.makeHabit(createdOn: today)
+
+        let zeroDays = HistoryBuilder.recentDays(
+            habit: habit,
+            checkIns: [],
+            today: today,
+            calendar: fixture.calendar,
+            count: 0
+        )
+        let negativeDays = HistoryBuilder.recentDays(
+            habit: habit,
+            checkIns: [],
+            today: today,
+            calendar: fixture.calendar,
+            count: -1
+        )
+
+        #expect(zeroDays.isEmpty)
+        #expect(negativeDays.isEmpty)
+    }
 }
 
 private struct HistoryFixture {

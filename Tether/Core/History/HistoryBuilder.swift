@@ -1,6 +1,41 @@
 import Foundation
 
 enum HistoryBuilder {
+    static func recentDays(
+        habit: Habit,
+        checkIns: [DailyCheckIn],
+        today: LocalDay,
+        calendar: Calendar,
+        count: Int = 7
+    ) -> [RecentCheckInDay] {
+        let habitCreatedOn = LocalDay(date: habit.createdAt, calendar: calendar)
+        let recordsByDay = checkIns.reduce(into: [LocalDay: DailyCheckIn]()) { result, checkIn in
+            guard
+                checkIn.habitID == habit.id,
+                checkIn.day >= habitCreatedOn,
+                checkIn.day <= today
+            else {
+                return
+            }
+
+            if let existing = result[checkIn.day], existing.updatedAt >= checkIn.updatedAt {
+                return
+            }
+            result[checkIn.day] = checkIn
+        }
+
+        let visibleCount = max(count, 0)
+        return (0..<visibleCount).map { offset in
+            let day = today.adding(days: offset - visibleCount + 1, calendar: calendar)
+            let isBeforeHabitStarted = day < habitCreatedOn
+            return RecentCheckInDay(
+                day: day,
+                state: isBeforeHabitStarted ? nil : recordsByDay[day]?.state,
+                isBeforeHabitStarted: isBeforeHabitStarted
+            )
+        }
+    }
+
     static func build(
         habit: Habit,
         checkIns: [DailyCheckIn],
