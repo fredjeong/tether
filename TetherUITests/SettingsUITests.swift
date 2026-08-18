@@ -231,6 +231,26 @@ final class SettingsUITests: XCTestCase {
         XCTAssertGreaterThan(lightLuminance, darkLuminance + 80)
     }
 
+    func testSystemSelectionRestoresOpenSettingsToSystemAppearance() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-ui-testing-reset", "-ui-testing-seed-habit"]
+        app.launch()
+
+        openSettings(in: app)
+        let appearance = app.segmentedControls["settings.appearance"]
+        XCTAssertTrue(appearance.waitForExistence(timeout: 5))
+
+        appearance.buttons["Dark"].tap()
+        XCTAssertTrue(appearance.buttons["Dark"].isSelected)
+        let darkLuminance = settingsLuminance(in: app)
+
+        appearance.buttons["System"].tap()
+        XCTAssertTrue(appearance.buttons["System"].isSelected)
+        let systemLuminance = settingsLuminance(in: app)
+
+        XCTAssertGreaterThan(systemLuminance, darkLuminance + 80)
+    }
+
     private func openSettings(in app: XCUIApplication) {
         let settings = app.buttons["settings.open"]
         XCTAssertTrue(settings.waitForExistence(timeout: 5))

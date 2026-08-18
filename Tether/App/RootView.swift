@@ -134,7 +134,11 @@ struct RootView: View {
             }
         }
         .background(TetherTheme.canvas)
-        .preferredColorScheme(themePreference.colorScheme)
+        .background(
+            InterfaceStyleConfigurator(
+                style: themePreference.userInterfaceStyle
+            )
+        )
         .tint(TetherTheme.accent)
     }
 
@@ -164,6 +168,47 @@ struct RootView: View {
                 return
             }
             await appModel.refreshForCurrentDay()
+        }
+    }
+}
+
+private struct InterfaceStyleConfigurator: UIViewRepresentable {
+    let style: UIUserInterfaceStyle
+
+    func makeUIView(context: Context) -> ConfiguratorView {
+        ConfiguratorView(style: style)
+    }
+
+    func updateUIView(_ view: ConfiguratorView, context: Context) {
+        view.style = style
+    }
+
+    @MainActor
+    final class ConfiguratorView: UIView {
+        var style: UIUserInterfaceStyle {
+            didSet {
+                applyStyle()
+            }
+        }
+
+        init(style: UIUserInterfaceStyle) {
+            self.style = style
+            super.init(frame: .zero)
+            isUserInteractionEnabled = false
+        }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            applyStyle()
+        }
+
+        private func applyStyle() {
+            window?.overrideUserInterfaceStyle = style
         }
     }
 }

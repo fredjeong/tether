@@ -15,9 +15,9 @@ enum ThemePreference: String, CaseIterable {
         }
     }
 
-    var colorScheme: ColorScheme? {
+    var userInterfaceStyle: UIUserInterfaceStyle {
         switch self {
-        case .system: nil
+        case .system: .unspecified
         case .light: .light
         case .dark: .dark
         }

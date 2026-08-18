@@ -112,7 +112,6 @@ struct SettingsView: View {
         }
         .scrollContentBackground(.hidden)
         .background(TetherTheme.canvas)
-        .preferredColorScheme(selectedTheme.wrappedValue.colorScheme)
         .navigationTitle(AppCopy.settingsTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
