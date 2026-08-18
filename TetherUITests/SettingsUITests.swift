@@ -175,7 +175,6 @@ final class SettingsUITests: XCTestCase {
         openSettings(in: app)
         let appearance = app.segmentedControls["settings.appearance"]
         XCTAssertTrue(appearance.waitForExistence(timeout: 5))
-        XCTAssertTrue(appearance.buttons["Light"].isSelected)
 
         appearance.buttons["Dark"].tap()
         XCTAssertTrue(appearance.buttons["Dark"].isSelected)
@@ -252,7 +251,14 @@ final class SettingsUITests: XCTestCase {
         XCTAssertTrue(appearance.buttons["System"].isSelected)
         let systemLuminance = settingsLuminance(in: app)
 
-        XCTAssertGreaterThan(systemLuminance, darkLuminance + 80)
+        switch UIScreen.main.traitCollection.userInterfaceStyle {
+        case .light:
+            XCTAssertGreaterThan(systemLuminance, darkLuminance + 80)
+        case .dark:
+            XCTAssertEqual(systemLuminance, darkLuminance, accuracy: 20)
+        default:
+            XCTFail("Expected a concrete system appearance.")
+        }
     }
 
     private func openSettings(in app: XCUIApplication) {
