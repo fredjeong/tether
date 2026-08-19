@@ -2,7 +2,7 @@ import XCTest
 
 @MainActor
 final class TodayUITests: XCTestCase {
-    func testDailyCheckInCanBeChangedAndPersistsAcrossRelaunch() {
+    func testDailyCheckInCanBeRemovedAndReplacedAcrossRelaunch() {
         let app = XCUIApplication()
         app.launchArguments = ["-ui-testing-reset", "-ui-testing-seed-habit"]
         app.launch()
@@ -35,10 +35,19 @@ final class TodayUITests: XCTestCase {
         done.tap()
 
         XCTAssertTrue(app.staticTexts["You're still connected."].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.buttons["checkin.change"].exists)
 
-        app.buttons["checkin.change"].tap()
-        app.buttons["checkin.rest"].tap()
+        let cancelCheckIn = app.buttons["checkin.cancel"]
+        XCTAssertTrue(cancelCheckIn.waitForExistence(timeout: 5))
+        XCTAssertEqual(cancelCheckIn.label, "Remove Done check-in")
+        cancelCheckIn.tap()
 
+        XCTAssertTrue(done.waitForExistence(timeout: 5))
+        XCTAssertTrue(light.exists)
+        XCTAssertTrue(rest.exists)
+        XCTAssertFalse(app.otherElements["today.selectedState"].exists)
+
+        rest.tap()
         let selectedRest = app.otherElements["today.selectedState"]
         XCTAssertTrue(selectedRest.waitForExistence(timeout: 5))
         XCTAssertEqual(selectedRest.label, "Rest, selected, I chose to rest today.")

@@ -18,5 +18,6 @@ protocol TetherStore: AnyObject {
         state: CheckInState,
         now: Date
     ) throws -> DailyCheckIn
+    func deleteCheckIn(habitID: UUID, day: LocalDay) throws
     func resetAll() throws
 }

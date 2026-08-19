@@ -59,13 +59,13 @@ struct CheckInStateGrid: View {
             }
             .contentShape(RoundedRectangle(cornerRadius: 16))
         }
-        .buttonStyle(CheckInStateGridButtonStyle())
+        .buttonStyle(CheckInStateButtonStyle())
         .accessibilityLabel("\(state.title), \(state.helper)")
         .accessibilityIdentifier(state.buttonIdentifier)
     }
 }
 
-private struct CheckInStateGridButtonStyle: ButtonStyle {
+struct CheckInStateButtonStyle: ButtonStyle {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     func makeBody(configuration: Configuration) -> some View {

@@ -216,6 +216,13 @@ private final class HistoryInMemoryStore: TetherStore {
         return created
     }
 
+    func deleteCheckIn(habitID: UUID, day: LocalDay) throws {
+        guard habit?.id == habitID else {
+            throw TetherStoreError.habitNotFound
+        }
+        checkIns.removeAll { $0.habitID == habitID && $0.day == day }
+    }
+
     func resetAll() throws {
         habit = nil
         checkIns = []

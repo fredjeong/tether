@@ -74,6 +74,20 @@ final class TodayViewModel {
         await reminderReconciliationTask?.value
     }
 
+    func clearTodayCheckIn() {
+        guard removeTodayCheckIn() else {
+            return
+        }
+        reminderReconciliationTask = Task { @MainActor in
+            await reconcileReminderAfterCheckIn()
+        }
+    }
+
+    func clearTodayCheckInAndReconcile() async {
+        clearTodayCheckIn()
+        await reminderReconciliationTask?.value
+    }
+
     private func saveSelection(_ state: CheckInState) -> Bool {
         do {
             let storedHabit = try environment.store.loadHabit()
@@ -97,6 +111,27 @@ final class TodayViewModel {
         } catch {
             try? reloadPersistedState()
             errorMessage = AppCopy.checkInSaveError
+            return false
+        }
+    }
+
+    private func removeTodayCheckIn() -> Bool {
+        do {
+            guard let storedHabit = try environment.store.loadHabit() else {
+                throw TetherStoreError.habitNotFound
+            }
+
+            let today = LocalDay(
+                date: environment.dayProvider.now,
+                calendar: environment.dayProvider.calendar
+            )
+            try environment.store.deleteCheckIn(habitID: storedHabit.id, day: today)
+            try reloadPersistedState()
+            errorMessage = nil
+            return true
+        } catch {
+            try? reloadPersistedState()
+            errorMessage = AppCopy.checkInRemoveError
             return false
         }
     }

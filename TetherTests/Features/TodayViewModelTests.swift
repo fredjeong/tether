@@ -70,6 +70,22 @@ struct TodayViewModelTests {
     }
 
     @Test
+    func clearingTodayCheckInRemovesItAndRestoresThePendingState() throws {
+        let fixture = try TodayFixture()
+        let viewModel = fixture.makeViewModel()
+        viewModel.load()
+        viewModel.select(.done)
+
+        viewModel.clearTodayCheckIn()
+
+        #expect(try fixture.store.loadCheckIns(habitID: fixture.habit.id).isEmpty)
+        #expect(viewModel.selectedState == nil)
+        #expect(viewModel.snapshot.current == 0)
+        #expect(!viewModel.snapshot.isCheckedInToday)
+        #expect(viewModel.recentDays.last?.state == nil)
+    }
+
+    @Test
     func yesterdayCheckInPreservesCurrentWhileTodayIsPending() throws {
         let fixture = try TodayFixture()
         try fixture.seedCheckIn(dayOffset: -1, state: .light)
@@ -290,6 +306,13 @@ private final class TodayInMemoryStore: TetherStore {
         )
         checkIns.append(created)
         return created
+    }
+
+    func deleteCheckIn(habitID: UUID, day: LocalDay) throws {
+        guard habit?.id == habitID else {
+            throw TetherStoreError.habitNotFound
+        }
+        checkIns.removeAll { $0.habitID == habitID && $0.day == day }
     }
 
     func resetAll() throws {

@@ -116,6 +116,31 @@ struct SwiftDataTetherStoreTests {
     }
 
     @Test
+    func deletingACheckInRemovesOnlyTheRequestedDay() throws {
+        let fixture = try StoreFixture()
+        let habit = try fixture.makeHabit()
+        let today = LocalDay(date: fixture.now, calendar: fixture.calendar)
+        let yesterday = today.adding(days: -1, calendar: fixture.calendar)
+
+        _ = try fixture.store.upsertCheckIn(
+            habitID: habit.id,
+            day: yesterday,
+            state: .light,
+            now: fixture.now.addingTimeInterval(-86_400)
+        )
+        _ = try fixture.store.upsertCheckIn(
+            habitID: habit.id,
+            day: today,
+            state: .done,
+            now: fixture.now
+        )
+
+        try fixture.store.deleteCheckIn(habitID: habit.id, day: today)
+
+        #expect(try fixture.store.loadCheckIns(habitID: habit.id).map(\.day) == [yesterday])
+    }
+
+    @Test
     func resetAllRemovesHabitAndCheckIns() throws {
         let fixture = try StoreFixture()
         let habit = try fixture.makeHabit()

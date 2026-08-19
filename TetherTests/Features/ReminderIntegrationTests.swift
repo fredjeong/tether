@@ -206,6 +206,23 @@ struct ReminderIntegrationTests {
     }
 
     @Test
+    func clearingTodayCheckInReconcilesWithoutTheRemovedDay() async throws {
+        let fixture = try ReminderIntegrationFixture(
+            reminderSettings: ReminderSettings(isEnabled: true, hour: 20, minute: 0)
+        )
+        let viewModel = fixture.makeTodayViewModel()
+        viewModel.load()
+        await viewModel.selectAndReconcile(.done)
+
+        await viewModel.clearTodayCheckInAndReconcile()
+
+        #expect(try fixture.store.loadCheckIns(habitID: fixture.habit.id).isEmpty)
+        #expect(viewModel.selectedState == nil)
+        #expect(!viewModel.snapshot.isCheckedInToday)
+        #expect(fixture.scheduler.reconcileCalls.last?.checkedDays == [])
+    }
+
+    @Test
     func checkInSchedulingFailureDoesNotRollBackTheSavedCheckIn() async throws {
         let fixture = try ReminderIntegrationFixture(
             reminderSettings: ReminderSettings(isEnabled: true, hour: 20, minute: 0),
@@ -500,6 +517,11 @@ private final class ReminderIntegrationStore: TetherStore {
         )
         checkIns.append(checkIn)
         return checkIn
+    }
+
+    func deleteCheckIn(habitID: UUID, day: LocalDay) throws {
+        guard habit?.id == habitID else { throw TetherStoreError.habitNotFound }
+        checkIns.removeAll { $0.habitID == habitID && $0.day == day }
     }
 
     func seedCheckIn(

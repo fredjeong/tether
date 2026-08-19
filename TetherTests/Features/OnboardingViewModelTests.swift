@@ -263,6 +263,10 @@ private final class OnboardingStore: TetherStore {
         throw TetherStoreError.habitNotFound
     }
 
+    func deleteCheckIn(habitID: UUID, day: LocalDay) throws {
+        throw TetherStoreError.habitNotFound
+    }
+
     func resetAll() throws {
         habits = []
     }

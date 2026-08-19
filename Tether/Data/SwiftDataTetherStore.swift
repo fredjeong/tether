@@ -115,6 +115,26 @@ final class SwiftDataTetherStore: TetherStore {
         return try model.checkIn()
     }
 
+    func deleteCheckIn(habitID: UUID, day: LocalDay) throws {
+        guard try habitExists(id: habitID) else {
+            throw TetherStoreError.habitNotFound
+        }
+
+        let uniqueDayKey = DailyCheckInModel.makeUniqueDayKey(
+            habitID: habitID,
+            day: day
+        )
+        var descriptor = FetchDescriptor<DailyCheckInModel>(
+            predicate: #Predicate { $0.uniqueDayKey == uniqueDayKey }
+        )
+        descriptor.fetchLimit = 1
+
+        if let model = try context.fetch(descriptor).first {
+            context.delete(model)
+            try saveOrRollback()
+        }
+    }
+
     func resetAll() throws {
         for checkIn in try context.fetch(FetchDescriptor<DailyCheckInModel>()) {
             context.delete(checkIn)

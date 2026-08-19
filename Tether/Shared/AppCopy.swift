@@ -29,9 +29,10 @@ enum AppCopy {
     static let todayPendingReminder = "You haven't checked in today."
     static let firstCheckInHeadline = "Start your tether today"
     static let todayCompletedMessage = "You're still connected."
-    static let changeAction = "Change"
     static let selectionStatus = "Selected"
     static let checkInSaveError = "Couldn't save your check-in. Please try again."
+    static let checkInRemoveError = "Couldn't remove your check-in. Please try again."
+    static let removeCheckInAccessibilityHint = "Shows Done, Light, and Rest options again."
     static let todayLoadError = "Couldn't load today's check-in. Please try again."
 
     static let reconnectHeadline = "Reconnect today"
@@ -75,5 +76,9 @@ enum AppCopy {
 
     static func daysTethered(_ count: Int) -> String {
         count == 1 ? "1 day tethered" : "\(count) days tethered"
+    }
+
+    static func removeCheckInAccessibilityLabel(for state: CheckInState) -> String {
+        "Remove \(state.title) check-in"
     }
 }

@@ -372,6 +372,13 @@ private final class SettingsInMemoryStore: TetherStore {
         return created
     }
 
+    func deleteCheckIn(habitID: UUID, day: LocalDay) throws {
+        guard habit?.id == habitID else {
+            throw TetherStoreError.habitNotFound
+        }
+        checkIns.removeAll { $0.habitID == habitID && $0.day == day }
+    }
+
     func resetAll() throws {
         if let resetError {
             throw resetError
