@@ -2,6 +2,22 @@ import XCTest
 
 @MainActor
 final class HistoryUITests: XCTestCase {
+    func testHistoryToolbarOpensSettings() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-ui-testing-reset", "-ui-testing-seed-history"]
+        app.launch()
+
+        let historyTab = app.tabBars.buttons["tab.history"]
+        XCTAssertTrue(historyTab.waitForExistence(timeout: 5))
+        historyTab.tap()
+
+        let settings = app.buttons["settings.open"]
+        XCTAssertTrue(settings.waitForExistence(timeout: 5))
+        settings.tap()
+
+        XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 5))
+    }
+
     func testSeededHistoryShowsMetricsCountsAndAllDayStates() {
         let app = XCUIApplication()
         app.launchArguments = ["-ui-testing-reset", "-ui-testing-seed-history"]

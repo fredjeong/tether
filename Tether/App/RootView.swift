@@ -68,25 +68,6 @@ struct RootView: View {
                                 .accessibilityIdentifier("settings.open")
                             }
                         }
-                        .sheet(isPresented: $isPresentingSettings) {
-                            NavigationStack {
-                                SettingsView(
-                                    environment: environment,
-                                    selectedTheme: Binding(
-                                        get: { themePreference },
-                                        set: { preference in
-                                            themePreference = preference
-                                            environment.themePreferenceStore.save(preference)
-                                        }
-                                    ),
-                                    onHabitSaved: appModel.didUpdateHabit,
-                                    onReset: {
-                                        appModel.didReset()
-                                        isPresentingSettings = false
-                                    }
-                                )
-                            }
-                        }
                 }
                 .tabItem {
                     Label("Today", systemImage: "sun.max")
@@ -96,10 +77,40 @@ struct RootView: View {
                 NavigationStack {
                     HistoryView(environment: environment)
                         .id("\(appModel.habit?.updatedAt.timeIntervalSinceReferenceDate ?? 0)-\(appModel.lifecycleRefreshID)")
+                        .toolbar {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button {
+                                    isPresentingSettings = true
+                                } label: {
+                                    Image(systemName: "gearshape")
+                                }
+                                .accessibilityLabel(AppCopy.settingsTitle)
+                                .accessibilityIdentifier("settings.open")
+                            }
+                        }
                 }
                 .tabItem {
                     Label(AppCopy.historyTitle, systemImage: "clock")
                         .accessibilityIdentifier("tab.history")
+                }
+            }
+            .sheet(isPresented: $isPresentingSettings) {
+                NavigationStack {
+                    SettingsView(
+                        environment: environment,
+                        selectedTheme: Binding(
+                            get: { themePreference },
+                            set: { preference in
+                                themePreference = preference
+                                environment.themePreferenceStore.save(preference)
+                            }
+                        ),
+                        onHabitSaved: appModel.didUpdateHabit,
+                        onReset: {
+                            appModel.didReset()
+                            isPresentingSettings = false
+                        }
+                    )
                 }
             }
             .overlay(alignment: .top) {
